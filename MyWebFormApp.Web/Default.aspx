@@ -13,19 +13,32 @@
                     </div>
                     <div class="card-body">
                         <asp:SqlDataSource ID="sdsCategory" runat="server"
-                            ConnectionString="<%$ ConnectionStrings:LatihanDbConnectionString %>"
-                            ProviderName="<%$ ConnectionStrings:LatihanDbConnectionString.ProviderName %>"
-                            SelectCommand="SELECT [CategoryID], [CategoryName] FROM [Categories]"></asp:SqlDataSource>
+                            ConnectionString="<%$ ConnectionStrings:MyDbConnectionString %>"
+                            SelectCommand="SELECT * FROM [Categories] ORDER BY [CategoryName] DESC" 
+                            DeleteCommand="DELETE FROM [Categories] WHERE [CategoryID] = @CategoryID" 
+                            InsertCommand="INSERT INTO [Categories] ([CategoryName]) VALUES (@CategoryName)" 
+                            UpdateCommand="UPDATE [Categories] SET [CategoryName] = @CategoryName WHERE [CategoryID] = @CategoryID">
+                            <DeleteParameters>
+                                <asp:Parameter Name="CategoryID" Type="Int32" />
+                            </DeleteParameters>
+                            <InsertParameters>
+                                <asp:Parameter Name="CategoryName" Type="String" />
+                            </InsertParameters>
+                            <UpdateParameters>
+                                <asp:Parameter Name="CategoryName" Type="String" />
+                                <asp:Parameter Name="CategoryID" Type="Int32" />
+                            </UpdateParameters>
+                        </asp:SqlDataSource>
                         <br />
 
-
                         <asp:GridView ID="gvCategories" CssClass="table table-striped" runat="server" AutoGenerateColumns="False"
-                            DataKeyNames="CategoryID" DataSourceID="sdsCategory">
+                            DataKeyNames="CategoryID" DataSourceID="sdsCategory" AllowPaging="True" AllowSorting="True" PageSize="3">
                             <Columns>
                                 <asp:BoundField DataField="CategoryID" HeaderText="Category ID"
                                     InsertVisible="False" ReadOnly="True" SortExpression="CategoryID" />
                                 <asp:BoundField DataField="CategoryName" HeaderText="Name"
                                     SortExpression="CategoryName" />
+                                <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                             </Columns>
                         </asp:GridView>
                     </div>
