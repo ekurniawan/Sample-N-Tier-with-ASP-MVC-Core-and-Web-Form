@@ -1,26 +1,31 @@
-﻿Public Class ProductsPage
+﻿Imports System.Data.SqlClient
+
+Public Class ProductsPage
     Inherits System.Web.UI.Page
 
 
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If Not Page.IsPostBack Then
-            Dim listHobby As New List(Of String)
-            listHobby.Add("Reading")
-            listHobby.Add("Swimming")
-            listHobby.Add("Cycling")
-            listHobby.Add("Running")
-            listHobby.Add("Singing")
-            listHobby.Add("Dancing")
-
-            ddHobby.DataSource = listHobby
-            ddHobby.DataBind()
-        End If
 
     End Sub
 
-    Protected Sub btnSubmit_Click(sender As Object, e As EventArgs)
-        lblHobby.Text = "Anda memilih: " & ddHobby.SelectedItem.Text
+    Protected Sub sdsArticles_Selected(sender As Object, e As SqlDataSourceStatusEventArgs)
+        If e.Exception IsNot Nothing Then
+            lblError.Text = "An error occurred while retrieving data. " & e.Exception.Message
+            e.ExceptionHandled = True
+        End If
+    End Sub
+
+    Protected Sub sdsArticles_Updating(sender As Object, e As SqlDataSourceCommandEventArgs)
+
+        Dim sb As New StringBuilder
+        For Each p As SqlParameter In e.Command.Parameters
+            If p.Value Is Nothing Then
+                e.Cancel = True
+                sb.Append(p.ParameterName & " is null" & "<br />")
+            End If
+        Next
+        lblError.Text = sb.ToString
     End Sub
 End Class

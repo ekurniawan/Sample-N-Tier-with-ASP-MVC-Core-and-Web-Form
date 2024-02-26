@@ -14,23 +14,35 @@
                     <div class="card-body">
                         <asp:SqlDataSource ID="sdsCategory" runat="server"
                             ConnectionString="<%$ ConnectionStrings:MyDbConnectionString %>"
-                            SelectCommand="SELECT * FROM [Categories] ORDER BY [CategoryName] DESC" 
+                            SelectCommand="usp_GetCategories" 
                             DeleteCommand="DELETE FROM [Categories] WHERE [CategoryID] = @CategoryID" 
-                            InsertCommand="INSERT INTO [Categories] ([CategoryName]) VALUES (@CategoryName)" 
-                            UpdateCommand="UPDATE [Categories] SET [CategoryName] = @CategoryName WHERE [CategoryID] = @CategoryID">
+                            InsertCommand="usp_CreateCategory" 
+                            FilterExpression="CategoryName LIKE '{0}%'"
+                            UpdateCommand="UPDATE [Categories] SET [CategoryName] = @CategoryName WHERE [CategoryID] = @CategoryID" InsertCommandType="StoredProcedure" SelectCommandType="StoredProcedure">
                             <DeleteParameters>
                                 <asp:Parameter Name="CategoryID" Type="Int32" />
                             </DeleteParameters>
                             <InsertParameters>
-                                <asp:Parameter Name="CategoryName" Type="String" />
+                                <asp:ControlParameter ControlID="txtCategoryName" Name="CategoryName" PropertyName="Text" Type="String" />
                             </InsertParameters>
                             <UpdateParameters>
                                 <asp:Parameter Name="CategoryName" Type="String" />
                                 <asp:Parameter Name="CategoryID" Type="Int32" />
                             </UpdateParameters>
+                            <FilterParameters>
+                                <asp:ControlParameter ControlID="txtSearch" Name="CategoryName" PropertyName="Text" Type="String" />
+                            </FilterParameters>
                         </asp:SqlDataSource>
                         <br />
-
+                        <label>Search Category By Name :</label><br />
+                        <asp:TextBox ID="txtSearch" CssClass="form-control" ToolTip="Insert Category Name" runat="server" />
+                        <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
+                        <br />
+                        <hr />
+                        <label>Insert Category Name :</label><br />
+                        <asp:TextBox ID="txtCategoryName" CssClass="form-control" ToolTip="Insert Category Name" runat="server" />
+                        <asp:Button ID="btnInsert" runat="server" Text="Insert" CssClass="btn btn-primary" OnClick="btnInsert_Click" /><br />
+                        <br />
                         <asp:GridView ID="gvCategories" CssClass="table table-striped" runat="server" AutoGenerateColumns="False"
                             DataKeyNames="CategoryID" DataSourceID="sdsCategory" AllowPaging="True" AllowSorting="True" PageSize="3">
                             <Columns>
@@ -40,7 +52,8 @@
                                     SortExpression="CategoryName" />
                                 <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                             </Columns>
-                        </asp:GridView>
+                        </asp:GridView><br />
+                        <asp:Label ID="lblKeterangan" Text="Keterangan" CssClass="text-danger" runat="server" />
                     </div>
                 </div>
             </div>

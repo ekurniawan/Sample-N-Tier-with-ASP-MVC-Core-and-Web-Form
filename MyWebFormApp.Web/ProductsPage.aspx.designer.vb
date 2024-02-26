@@ -14,29 +14,29 @@ Option Explicit On
 Partial Public Class ProductsPage
 
     '''<summary>
-    '''ddHobby control.
+    '''sdsArticles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddHobby As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents sdsArticles As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''lblHobby control.
+    '''gvArticles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblHobby As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents gvArticles As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''btnSubmit control.
+    '''lblError control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
 End Class
