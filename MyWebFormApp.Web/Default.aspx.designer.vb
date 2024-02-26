@@ -12,4 +12,22 @@ Option Explicit On
 
 
 Partial Public Class _Default
+
+    '''<summary>
+    '''sdsCategory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents sdsCategory As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''gvCategories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
 End Class

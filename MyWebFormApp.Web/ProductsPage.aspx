@@ -12,10 +12,12 @@
                  <h6 class="m-0 font-weight-bold text-primary">About Page</h6>
              </div>
              <div class="card-body">
-                 List of products
+                 
+                 <asp:DropDownList ID="ddHobby" runat="server"></asp:DropDownList><br />
+                 <asp:Label ID="lblHobby" runat="server" /><br />
+                 <asp:Button ID="btnSubmit" Text="Submit" CssClass="btn btn-primary" runat="server" OnClick="btnSubmit_Click" />
              </div>
          </div>
-
      </div>
 
  </div>
