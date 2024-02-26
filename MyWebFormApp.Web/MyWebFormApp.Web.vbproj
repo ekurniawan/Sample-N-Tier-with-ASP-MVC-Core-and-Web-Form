@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ArticlePage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -146,6 +147,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="CookiePage.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1901,11 +1903,25 @@
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ArticlePage.aspx.designer.vb">
+      <DependentUpon>ArticlePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticlePage.aspx.vb">
+      <DependentUpon>ArticlePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contact.aspx.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CookiePage.aspx.designer.vb">
+      <DependentUpon>CookiePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CookiePage.aspx.vb">
+      <DependentUpon>CookiePage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.vb">
