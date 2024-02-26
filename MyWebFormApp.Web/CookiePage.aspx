@@ -15,7 +15,7 @@
                  <asp:SqlDataSource ID="sdsArticles" runat="server" ConnectionString="<%$ ConnectionStrings:MyDbConnectionString %>" 
                      SelectCommand="usp_GetArticlesByCategoryId" SelectCommandType="StoredProcedure" >
                      <SelectParameters>
-                         <asp:CookieParameter CookieName="CategoryID" DefaultValue="1" Name="CategoryID" Type="Int32" />
+                         <asp:CookieParameter CookieName="CategoryID" Name="CategoryID" Type="Int32" />
                      </SelectParameters>
                  </asp:SqlDataSource>
                  <asp:TextBox ID="txtCategoryID" runat="server" /><br />

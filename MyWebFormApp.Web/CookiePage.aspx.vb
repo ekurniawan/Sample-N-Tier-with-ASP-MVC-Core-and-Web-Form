@@ -21,7 +21,6 @@
             Response.SetCookie(currCookie)
             lblCookie.Text = "Cookie has been updated"
         End If
-        gvArticles.DataBind()
     End Sub
 
     Protected Sub btnGetCookie_Click(sender As Object, e As EventArgs)
