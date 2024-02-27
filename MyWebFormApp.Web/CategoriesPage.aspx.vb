@@ -17,7 +17,10 @@ Public Class CategoriesPage
         If e.CommandName = "Select" Then
             Dim index As Integer = Convert.ToInt32(e.CommandArgument)
             Dim categoryID As Integer = Convert.ToInt32(gvCategories.DataKeys(index).Value)
-            lblCategory.Text = "Category ID yg dipilih: " & categoryID.ToString()
+            'Dim categoryName = gvCategories.DataKeys(index)("CategoryName").ToString()
+            txtCategoryID.Text = categoryID.ToString()
+            Dim objCategory = categoryDAL.GetById(categoryID)
+            txtCategoryName.Text = objCategory.CategoryName
         End If
     End Sub
 End Class

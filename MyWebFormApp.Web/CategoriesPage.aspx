@@ -33,19 +33,16 @@
                         <div class="col-lg-6">
                             <div class="mb-3 mt-3">
                                 <label for="txtCategoryID" class="form-label">Category ID :</label>
-                                <asp:TextBox ID="txtCategoryID" runat="server" CssClass="form-control" />
+                                <asp:TextBox ID="txtCategoryID" runat="server" ReadOnly="true" CssClass="form-control" />
                             </div>
                             <div class="mb-3">
                                 <label for="txtCategoryName" class="form-label">Category Name :</label>
                                 <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-control" />
                             </div>
-                            <asp:Button Text="Edit" CssClass="btn btn-primary" runat="server" />
+                            <asp:Button Text="Edit" CssClass="btn btn-primary" runat="server" />&nbsp;
+                            <asp:Button Text="Add" CssClass="btn btn-success" runat="server" />&nbsp;
                         </div>
                     </div>
-
-
-
-
                 </div>
             </div>
         </div>
