@@ -14,10 +14,20 @@
                 </div>
                 <div class="card-body">
 
-                    <asp:Literal ID="ltMessage" runat="server" /><br /><br />
+                    <asp:Literal ID="ltMessage" runat="server" /><br />
+                    <br />
+
                     <div class="row">
-                       
+                        <br />
                         <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col">
+                                    <asp:TextBox ID="txtSearch" CssClass="form-control" runat="server" />
+                                </div>
+                                <div class="col">
+                                    <asp:Button ID="btnSearch" Text="Search" CssClass="btn btn-success" runat="server" />
+                                </div>
+                            </div><br />
                             <asp:GridView ID="gvCategories"
                                 CssClass="table table-hover" DataKeyNames="CategoryID" AutoGenerateColumns="false"
                                 OnRowCommand="gvCategories_RowCommand"
@@ -29,7 +39,7 @@
                                 </Columns>
                             </asp:GridView>
                             <hr />
-                            
+
                         </div>
 
                         <div class="col-lg-6">
@@ -42,10 +52,8 @@
                                 <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-control" />
                             </div>
                             <asp:Button ID="btnEdit" Text="Edit" CssClass="btn btn-primary" runat="server" OnClick="btnEdit_Click" />&nbsp;
-                            <asp:Button Text="Add" CssClass="btn btn-danger" runat="server" />&nbsp;
-                            <asp:Button Text="Save" CssClass="btn btn-success" Enabled="false" runat="server" />
-
-                            
+                            <asp:Button ID="btnAdd" Text="Add" CssClass="btn btn-danger" runat="server" OnClick="btnAdd_Click" />&nbsp;
+                            <asp:Button ID="btnSave" Text="Save" CssClass="btn btn-success" Enabled="false" runat="server" OnClick="btnSave_Click" />
                         </div>
                     </div>
                 </div>

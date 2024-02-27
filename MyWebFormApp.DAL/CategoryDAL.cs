@@ -51,7 +51,27 @@ namespace MyWebFormApp.DAL
 
         public void Insert(Category entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = "usp_CreateCategory";
+                var param = new { CategoryName = entity.CategoryName };
+                try
+                {
+                    int result = conn.Execute(strSql, param, commandType: System.Data.CommandType.StoredProcedure);
+                    if (result != 1)
+                    {
+                        throw new ArgumentException("Insert data failed..");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ex.Message);
+                }
+            }
         }
 
         public void Update(Category entity)
@@ -66,7 +86,7 @@ namespace MyWebFormApp.DAL
                     int result = conn.Execute(strSql, param);
 
                     //jika result = -1, berarti update data gagal
-                    if (result == -1)
+                    if (result != 1)
                     {
                         throw new Exception("Update data failed..");
                     }

@@ -13,6 +13,7 @@ Public Class CategoriesPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            btnSave.Enabled = False
             LoadData()
         End If
     End Sub
@@ -42,6 +43,26 @@ Public Class CategoriesPage
             categoryDAL.Update(updateCategory)
             LoadData()
             ltMessage.Text = "<span class='alert alert-success'>Category updated successfully</span>"
+        Catch ex As Exception
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
+        End Try
+    End Sub
+
+    Protected Sub btnAdd_Click(sender As Object, e As EventArgs)
+        txtCategoryID.Text = String.Empty
+        txtCategoryName.Text = String.Empty
+        btnSave.Enabled = True
+    End Sub
+
+    Protected Sub btnSave_Click(sender As Object, e As EventArgs)
+        Try
+            Dim insertCategory As New Category
+            insertCategory.CategoryName = txtCategoryName.Text
+            categoryDAL.Insert(insertCategory)
+
+            LoadData()
+            btnSave.Enabled = False
+            ltMessage.Text = "<span class='alert alert-success'>Category added successfully</span>"
         Catch ex As Exception
             ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
         End Try
