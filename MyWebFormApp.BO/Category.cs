@@ -6,12 +6,12 @@ namespace MyWebFormApp.BO
     {
         public Category()
         {
-            this.Articles = new HashSet<Article>();
+            this.Articles = new List<Article>();
         }
 
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
 
-        public ICollection<Article> Articles { get; set; }
+        public IEnumerable<Article> Articles { get; set; }
     }
 }
