@@ -157,6 +157,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pics\dua.png" />
+    <Content Include="Pics\empat.png" />
+    <Content Include="Pics\satu.png" />
+    <Content Include="Pics\tiga.png" />
     <Content Include="ProductsPage.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
