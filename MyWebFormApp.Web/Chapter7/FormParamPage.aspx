@@ -17,7 +17,7 @@
                       InsertCommand="usp_CreateCategory" InsertCommandType="StoredProcedure" 
                       SelectCommand="usp_GetCategories" SelectCommandType="StoredProcedure" >
                       <InsertParameters>
-                          <asp:Parameter Name="CategoryName" Type="String" />
+                          <asp:FormParameter FormField="CategoryName" Name="CategoryName" Type="String" />
                       </InsertParameters>
                   </asp:SqlDataSource>
 

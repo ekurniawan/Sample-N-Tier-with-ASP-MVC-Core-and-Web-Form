@@ -131,6 +131,8 @@
     <Content Include="ArticlePage.aspx" />
     <Content Include="Chapter7\FormInsertCategory.html" />
     <Content Include="Chapter7\FormParamPage.aspx" />
+    <Content Include="Chapter7\GetQueryParamPage.aspx" />
+    <Content Include="Chapter7\QueryParamPage.aspx" />
     <Content Include="Chapter7\SessionPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -1918,6 +1920,20 @@
     </Compile>
     <Compile Include="Chapter7\FormParamPage.aspx.vb">
       <DependentUpon>FormParamPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Chapter7\GetQueryParamPage.aspx.designer.vb">
+      <DependentUpon>GetQueryParamPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chapter7\GetQueryParamPage.aspx.vb">
+      <DependentUpon>GetQueryParamPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Chapter7\QueryParamPage.aspx.designer.vb">
+      <DependentUpon>QueryParamPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chapter7\QueryParamPage.aspx.vb">
+      <DependentUpon>QueryParamPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Chapter7\SessionPage.aspx.designer.vb">
