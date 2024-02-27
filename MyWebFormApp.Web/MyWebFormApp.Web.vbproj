@@ -129,6 +129,8 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="ArticlePage.aspx" />
+    <Content Include="Chapter7\FormInsertCategory.html" />
+    <Content Include="Chapter7\FormParamPage.aspx" />
     <Content Include="Chapter7\SessionPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -1909,6 +1911,13 @@
     </Compile>
     <Compile Include="ArticlePage.aspx.vb">
       <DependentUpon>ArticlePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Chapter7\FormParamPage.aspx.designer.vb">
+      <DependentUpon>FormParamPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chapter7\FormParamPage.aspx.vb">
+      <DependentUpon>FormParamPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Chapter7\SessionPage.aspx.designer.vb">
