@@ -29,6 +29,8 @@
                           <asp:BoundField DataField="PublishDate" HeaderText="PublishDate" SortExpression="PublishDate" />
                       </Columns>
                   </asp:GridView>
+                  <hr />
+                  <asp:Label ID="lblKetrangan" runat="server" />
               </div>
           </div>
 

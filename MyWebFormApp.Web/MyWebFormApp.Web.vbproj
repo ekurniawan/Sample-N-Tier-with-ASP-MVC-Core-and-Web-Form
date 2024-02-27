@@ -134,6 +134,7 @@
     <Content Include="Chapter7\GetQueryParamPage.aspx" />
     <Content Include="Chapter7\QueryParamPage.aspx" />
     <Content Include="Chapter7\SessionPage.aspx" />
+    <Content Include="Chapter8\MasterDetailGridPage.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -1941,6 +1942,13 @@
     </Compile>
     <Compile Include="Chapter7\SessionPage.aspx.vb">
       <DependentUpon>SessionPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Chapter8\MasterDetailGridPage.aspx.designer.vb">
+      <DependentUpon>MasterDetailGridPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chapter8\MasterDetailGridPage.aspx.vb">
+      <DependentUpon>MasterDetailGridPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.vb">

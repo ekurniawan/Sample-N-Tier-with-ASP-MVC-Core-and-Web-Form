@@ -39,4 +39,31 @@ Partial Public Class QueryParamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblKeterangan As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''btnGet control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGet As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblGetData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblGetData As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''rdlCategories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rdlCategories As Global.System.Web.UI.WebControls.RadioButtonList
 End Class

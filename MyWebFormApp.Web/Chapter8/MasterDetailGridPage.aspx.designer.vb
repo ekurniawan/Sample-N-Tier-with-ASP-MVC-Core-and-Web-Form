@@ -11,7 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class GetQueryParamPage
+Partial Public Class MasterDetailGridPage
+
+    '''<summary>
+    '''sdsCategories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents sdsCategories As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''sdsArticles control.
@@ -23,6 +32,15 @@ Partial Public Class GetQueryParamPage
     Protected WithEvents sdsArticles As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''gvCategories control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
     '''gvArticles control.
     '''</summary>
     '''<remarks>
@@ -30,13 +48,4 @@ Partial Public Class GetQueryParamPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvArticles As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
-    '''lblKetrangan control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblKetrangan As Global.System.Web.UI.WebControls.Label
 End Class
