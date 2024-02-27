@@ -14,7 +14,9 @@
                 </div>
                 <div class="card-body">
 
+                    <asp:Literal ID="ltMessage" runat="server" /><br /><br />
                     <div class="row">
+                       
                         <div class="col-lg-6">
                             <asp:GridView ID="gvCategories"
                                 CssClass="table table-hover" DataKeyNames="CategoryID" AutoGenerateColumns="false"
@@ -27,7 +29,7 @@
                                 </Columns>
                             </asp:GridView>
                             <hr />
-                            <asp:Label ID="lblCategory" runat="server" />
+                            
                         </div>
 
                         <div class="col-lg-6">
@@ -39,8 +41,11 @@
                                 <label for="txtCategoryName" class="form-label">Category Name :</label>
                                 <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-control" />
                             </div>
-                            <asp:Button Text="Edit" CssClass="btn btn-primary" runat="server" />&nbsp;
-                            <asp:Button Text="Add" CssClass="btn btn-success" runat="server" />&nbsp;
+                            <asp:Button ID="btnEdit" Text="Edit" CssClass="btn btn-primary" runat="server" OnClick="btnEdit_Click" />&nbsp;
+                            <asp:Button Text="Add" CssClass="btn btn-danger" runat="server" />&nbsp;
+                            <asp:Button Text="Save" CssClass="btn btn-success" Enabled="false" runat="server" />
+
+                            
                         </div>
                     </div>
                 </div>

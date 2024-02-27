@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class CategoriesPage
 
     '''<summary>
+    '''ltMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltMessage As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''gvCategories control.
     '''</summary>
     '''<remarks>
@@ -21,15 +30,6 @@ Partial Public Class CategoriesPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
-    '''lblCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblCategory As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''txtCategoryID control.
@@ -48,4 +48,13 @@ Partial Public Class CategoriesPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtCategoryName As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.Button
 End Class

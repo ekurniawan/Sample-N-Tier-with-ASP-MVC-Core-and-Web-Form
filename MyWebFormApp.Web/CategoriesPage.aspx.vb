@@ -1,15 +1,19 @@
-﻿Imports MyWebFormApp.DAL
+﻿Imports MyWebFormApp.BO
+Imports MyWebFormApp.DAL
 
 Public Class CategoriesPage
     Inherits System.Web.UI.Page
 
     Dim categoryDAL As New CategoryDAL()
 
+    Sub LoadData()
+        gvCategories.DataSource = categoryDAL.GetAll()
+        gvCategories.DataBind()
+    End Sub
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-
-            gvCategories.DataSource = categoryDAL.GetAll()
-            gvCategories.DataBind()
+            LoadData()
         End If
     End Sub
 
@@ -22,5 +26,24 @@ Public Class CategoriesPage
             Dim objCategory = categoryDAL.GetById(categoryID)
             txtCategoryName.Text = objCategory.CategoryName
         End If
+    End Sub
+
+
+    Protected Sub btnEdit_Click(sender As Object, e As EventArgs)
+        Try
+            If String.IsNullOrEmpty(txtCategoryID.Text) OrElse String.IsNullOrEmpty(txtCategoryName.Text) Then
+                ltMessage.Text = "<span class='alert alert-danger'>Category ID and Name are required</span>"
+                Return
+            End If
+
+            Dim updateCategory As New Category
+            updateCategory.CategoryID = Convert.ToInt32(txtCategoryID.Text)
+            updateCategory.CategoryName = txtCategoryName.Text
+            categoryDAL.Update(updateCategory)
+            LoadData()
+            ltMessage.Text = "<span class='alert alert-success'>Category updated successfully</span>"
+        Catch ex As Exception
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
+        End Try
     End Sub
 End Class

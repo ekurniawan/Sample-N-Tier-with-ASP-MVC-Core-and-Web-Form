@@ -56,7 +56,31 @@ namespace MyWebFormApp.DAL
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                try
+                {
+                    var strSql = @"UPDATE [Categories] SET [CategoryName] = @CategoryName WHERE [CategoryID] = @CategoryID";
+                    var param = new { CategoryName = entity.CategoryName, CategoryID = entity.CategoryID };
+                    int result = conn.Execute(strSql, param);
+
+                    //jika result = -1, berarti update data gagal
+                    if (result == -1)
+                    {
+                        throw new Exception("Update data failed..");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception($"{sqlEx.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+
         }
     }
 }
