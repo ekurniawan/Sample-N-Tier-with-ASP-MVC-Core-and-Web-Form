@@ -46,8 +46,17 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.6\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -129,6 +138,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="ArticlePage.aspx" />
+    <Content Include="CategoriesPage.aspx" />
     <Content Include="Chapter7\FormInsertCategory.html" />
     <Content Include="Chapter7\FormParamPage.aspx" />
     <Content Include="Chapter7\GetQueryParamPage.aspx" />
@@ -1920,6 +1930,13 @@
       <DependentUpon>ArticlePage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="CategoriesPage.aspx.designer.vb">
+      <DependentUpon>CategoriesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesPage.aspx.vb">
+      <DependentUpon>CategoriesPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Chapter7\FormParamPage.aspx.designer.vb">
       <DependentUpon>FormParamPage.aspx</DependentUpon>
     </Compile>
@@ -2233,6 +2250,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyWebFormApp.BO\MyWebFormApp.BO.csproj">
+      <Project>{71c69f31-623e-4f2b-a48f-5ed13316b280}</Project>
+      <Name>MyWebFormApp.BO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyWebFormApp.DAL\MyWebFormApp.DAL.csproj">
+      <Project>{3fc7ad03-df09-4a13-bfca-68a7b6dbac37}</Project>
+      <Name>MyWebFormApp.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
