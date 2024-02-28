@@ -66,7 +66,13 @@ namespace MyWebFormApp.DAL
 
         public IEnumerable<Category> GetByName(string name)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select * from Categories where CategoryName like @CategoryName";
+                var param = new { CategoryName = $"%{name}%" };
+                var results = conn.Query<Category>(strSql, param);
+                return results;
+            }
         }
 
         public void Insert(Category entity)

@@ -1,4 +1,5 @@
-﻿Imports MyWebFormApp.BLL
+﻿Imports System.Web.ModelBinding
+Imports MyWebFormApp.BLL
 Imports MyWebFormApp.BLL.DTOs
 
 Public Class CategoryObjectDSPage
@@ -6,8 +7,8 @@ Public Class CategoryObjectDSPage
 
     Dim _categoryBLL As New CategoryBLL()
 
-    Public Function GetAll() As List(Of CategoryDTO)
-        Return _categoryBLL.GetAll()
+    Public Function GetAll(<Control("txtSearch")> categoryName As String) As List(Of CategoryDTO)
+        Return _categoryBLL.GetByName(categoryName)
     End Function
 
     Public Sub Update(CategoryID As Integer, CategoryName As String)
@@ -18,11 +19,11 @@ Public Class CategoryObjectDSPage
             _categoryUpdateDTO.CategoryName = CategoryName
 
             _categoryBLL.Update(_categoryUpdateDTO)
-            lblKeterangan.Text = "Data berhasil diupdate " & CategoryName.ToString()
+            ltMessage.Text = "<span class='alert alert-success'>Category updated successfully</span>"
 
             gvCategories.DataBind()
         Catch ex As Exception
-            lblKeterangan.Text = ex.Message
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
         End Try
     End Sub
 
@@ -34,10 +35,10 @@ Public Class CategoryObjectDSPage
     Public Sub Delete(CategoryID As Integer)
         Try
             _categoryBLL.Delete(CategoryID)
-            lblKeterangan.Text = "Data berhasil dihapus " & CategoryID.ToString()
+            ltMessage.Text = "<span class='alert alert-success'>Category deleted successfully</span>"
             gvCategories.DataBind()
         Catch ex As Exception
-            lblKeterangan.Text = ex.Message
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
         End Try
     End Sub
 End Class

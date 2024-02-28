@@ -66,7 +66,19 @@ namespace MyWebFormApp.BLL
 
         public IEnumerable<CategoryDTO> GetByName(string name)
         {
-            throw new System.NotImplementedException();
+            var categories = _categoryDAL.GetByName(name);
+
+            //mapping ke DTO
+            List<CategoryDTO> listCategoriesDto = new List<CategoryDTO>();
+            foreach (var category in categories)
+            {
+                listCategoriesDto.Add(new CategoryDTO
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName
+                });
+            }
+            return listCategoriesDto;
         }
 
         public void Insert(CategoryCreateDTO entity)

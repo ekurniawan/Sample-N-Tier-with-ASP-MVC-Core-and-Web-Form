@@ -14,6 +14,33 @@ Option Explicit On
 Partial Public Class CategoryObjectDSPage
 
     '''<summary>
+    '''ltMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltMessage As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''txtSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''gvCategories control.
     '''</summary>
     '''<remarks>
@@ -23,20 +50,20 @@ Partial Public Class CategoryObjectDSPage
     Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''lblKeterangan control.
+    '''txtCategoryName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblKeterangan As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtCategoryName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''btnInsert control.
+    '''btnAdd control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnInsert As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.Button
 End Class
