@@ -1,13 +1,13 @@
-﻿Imports MyWebFormApp.BO
-Imports MyWebFormApp.DAL
+﻿Imports MyWebFormApp.BLL
+Imports MyWebFormApp.BLL.DTOs
 
 Public Class CategoriesPage
     Inherits System.Web.UI.Page
 
-    Dim categoryDAL As New CategoryDAL()
+    Dim categoryBLL As New CategoryBLL()
 
     Sub LoadData()
-        gvCategories.DataSource = categoryDAL.GetAll()
+        gvCategories.DataSource = categoryBLL.GetAll()
         gvCategories.DataBind()
     End Sub
 
@@ -24,8 +24,18 @@ Public Class CategoriesPage
             Dim categoryID As Integer = Convert.ToInt32(gvCategories.DataKeys(index).Value)
             'Dim categoryName = gvCategories.DataKeys(index)("CategoryName").ToString()
             txtCategoryID.Text = categoryID.ToString()
-            Dim objCategory = categoryDAL.GetById(categoryID)
+            Dim objCategory = categoryBLL.GetById(categoryID)
             txtCategoryName.Text = objCategory.CategoryName
+        ElseIf e.CommandName = "Delete" Then
+            Dim index As Integer = Convert.ToInt32(e.CommandArgument)
+            Dim categoryID As Integer = Convert.ToInt32(gvCategories.DataKeys(index).Value)
+            Try
+                categoryBLL.Delete(categoryID)
+                LoadData()
+                ltMessage.Text = "<span class='alert alert-success'>Category deleted successfully</span>"
+            Catch ex As Exception
+                ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
+            End Try
         End If
     End Sub
 
@@ -37,10 +47,10 @@ Public Class CategoriesPage
                 Return
             End If
 
-            Dim updateCategory As New Category
+            Dim updateCategory As New CategoryUpdateDTO
             updateCategory.CategoryID = Convert.ToInt32(txtCategoryID.Text)
             updateCategory.CategoryName = txtCategoryName.Text
-            categoryDAL.Update(updateCategory)
+            categoryBLL.Update(updateCategory)
             LoadData()
             ltMessage.Text = "<span class='alert alert-success'>Category updated successfully</span>"
         Catch ex As Exception
@@ -56,9 +66,9 @@ Public Class CategoriesPage
 
     Protected Sub btnSave_Click(sender As Object, e As EventArgs)
         Try
-            Dim insertCategory As New Category
+            Dim insertCategory As New CategoryCreateDTO
             insertCategory.CategoryName = txtCategoryName.Text
-            categoryDAL.Insert(insertCategory)
+            categoryBLL.Insert(insertCategory)
 
             LoadData()
             btnSave.Enabled = False
@@ -66,5 +76,9 @@ Public Class CategoriesPage
         Catch ex As Exception
             ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span>"
         End Try
+    End Sub
+
+    Protected Sub gvCategories_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
+
     End Sub
 End Class

@@ -2252,13 +2252,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyWebFormApp.BO\MyWebFormApp.BO.csproj">
-      <Project>{71c69f31-623e-4f2b-a48f-5ed13316b280}</Project>
-      <Name>MyWebFormApp.BO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyWebFormApp.DAL\MyWebFormApp.DAL.csproj">
-      <Project>{3fc7ad03-df09-4a13-bfca-68a7b6dbac37}</Project>
-      <Name>MyWebFormApp.DAL</Name>
+    <ProjectReference Include="..\MyWebFormApp.BLL\MyWebFormApp.BLL.csproj">
+      <Project>{41187e83-ee44-41a0-a57a-9d38a09efce4}</Project>
+      <Name>MyWebFormApp.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

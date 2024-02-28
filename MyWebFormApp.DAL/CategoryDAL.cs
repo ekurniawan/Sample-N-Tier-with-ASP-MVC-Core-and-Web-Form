@@ -18,7 +18,27 @@ namespace MyWebFormApp.DAL
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"DELETE FROM [Categories] WHERE [CategoryID] = @CategoryID";
+                var param = new { CategoryID = id };
+                try
+                {
+                    int result = conn.Execute(strSql, param);
+                    if (result != 1)
+                    {
+                        throw new ArgumentException("Delete data failed..");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ex.Message);
+                }
+            }
         }
 
         public IEnumerable<Category> GetAll()

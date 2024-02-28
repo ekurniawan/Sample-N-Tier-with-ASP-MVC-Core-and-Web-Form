@@ -30,12 +30,12 @@
                             </div><br />
                             <asp:GridView ID="gvCategories"
                                 CssClass="table table-hover" DataKeyNames="CategoryID" AutoGenerateColumns="false"
-                                OnRowCommand="gvCategories_RowCommand"
+                                OnRowCommand="gvCategories_RowCommand" OnRowDeleting="gvCategories_RowDeleting"
                                 runat="server">
                                 <Columns>
                                     <asp:BoundField DataField="CategoryID" HeaderText="ID" />
                                     <asp:BoundField DataField="CategoryName" HeaderText="Name" />
-                                    <asp:CommandField ShowSelectButton="True" />
+                                    <asp:CommandField ShowSelectButton="True" ShowDeleteButton="true" />
                                 </Columns>
                             </asp:GridView>
                             <hr />
@@ -53,7 +53,8 @@
                             </div>
                             <asp:Button ID="btnEdit" Text="Edit" CssClass="btn btn-primary" runat="server" OnClick="btnEdit_Click" />&nbsp;
                             <asp:Button ID="btnAdd" Text="Add" CssClass="btn btn-danger" runat="server" OnClick="btnAdd_Click" />&nbsp;
-                            <asp:Button ID="btnSave" Text="Save" CssClass="btn btn-success" Enabled="false" runat="server" OnClick="btnSave_Click" />
+                            <asp:Button ID="btnSave" Text="Save" CssClass="btn btn-success" Enabled="false" runat="server" OnClick="btnSave_Click" />&nbsp;
+                   
                         </div>
                     </div>
                 </div>
