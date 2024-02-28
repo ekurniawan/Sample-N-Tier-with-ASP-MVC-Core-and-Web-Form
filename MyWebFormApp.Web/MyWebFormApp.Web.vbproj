@@ -139,6 +139,7 @@
     <Content Include="About.aspx" />
     <Content Include="ArticlePage.aspx" />
     <Content Include="CategoriesPage.aspx" />
+    <Content Include="CategoryObjectDSPage.aspx" />
     <Content Include="Chapter7\FormInsertCategory.html" />
     <Content Include="Chapter7\FormParamPage.aspx" />
     <Content Include="Chapter7\GetQueryParamPage.aspx" />
@@ -1935,6 +1936,13 @@
     </Compile>
     <Compile Include="CategoriesPage.aspx.vb">
       <DependentUpon>CategoriesPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CategoryObjectDSPage.aspx.designer.vb">
+      <DependentUpon>CategoryObjectDSPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryObjectDSPage.aspx.vb">
+      <DependentUpon>CategoryObjectDSPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Chapter7\FormParamPage.aspx.designer.vb">
