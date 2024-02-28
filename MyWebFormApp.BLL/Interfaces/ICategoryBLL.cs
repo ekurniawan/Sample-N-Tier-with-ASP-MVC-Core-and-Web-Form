@@ -11,7 +11,7 @@ namespace MyWebFormApp.BLL.Interfaces
         IEnumerable<CategoryDTO> GetByName(string name);
         void Insert(CategoryCreateDTO entity);
         void Update(CategoryUpdateDTO entity);
-        IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize);
-        int GetCountCategories();
+        IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize, string name);
+        int GetCountCategories(string name);
     }
 }

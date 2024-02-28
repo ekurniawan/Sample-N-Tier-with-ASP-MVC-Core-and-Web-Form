@@ -1,4 +1,5 @@
-﻿Imports MyWebFormApp.BLL
+﻿Imports System.Web.ModelBinding
+Imports MyWebFormApp.BLL
 Imports MyWebFormApp.BLL.DTOs
 
 Public Class CategoryObjectDSPage
@@ -11,16 +12,28 @@ Public Class CategoryObjectDSPage
 
 #Region "Initiate"
     Sub InitiateButtonNavigation()
-        If CInt(ViewState("PageNumber")) = 1 Then
+        Dim maxPage = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize")) + 1)
+        Dim cek = CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize"))
+        If cek = 1 Then
+            maxPage = 1
+        End If
+
+        If cek = 1 Then
+            btnPrev.Enabled = False
+            btnNext.Enabled = False
+        ElseIf CInt(ViewState("PageNumber")) = 1 Then
             btnPrev.Enabled = False
             btnNext.Enabled = True
-        ElseIf CInt(ViewState("PageNumber")) = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize"))) + 1 Then
+        ElseIf CInt(ViewState("PageNumber")) = maxPage Then
             btnPrev.Enabled = True
             btnNext.Enabled = False
         Else
             btnPrev.Enabled = True
             btnNext.Enabled = True
         End If
+
+        ViewState("RecordCount") = _categoryBLL.GetCountCategories(txtSearch.Text)
+        ltPosition.Text = "Page " & ViewState("PageNumber") & " of " & maxPage
     End Sub
 #End Region
 
@@ -28,9 +41,9 @@ Public Class CategoryObjectDSPage
     '    Return _categoryBLL.GetByName(categoryName)
     'End Function
 
-    Public Function GetAll() As List(Of CategoryDTO)
+    Public Function GetAll(<Control("txtSearch")> name As String) As List(Of CategoryDTO)
         'Return _categoryBLL.GetWithPaging(2, 5)
-        Return _categoryBLL.GetWithPaging(CInt(ViewState("PageNumber")), CInt(ViewState("PageSize")))
+        Return _categoryBLL.GetWithPaging(CInt(ViewState("PageNumber")), CInt(ViewState("PageSize")), name)
     End Function
 
     Public Sub Update(CategoryID As Integer, CategoryName As String)
@@ -52,13 +65,12 @@ Public Class CategoryObjectDSPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            Dim recordCount = _categoryBLL.GetCountCategories()
             ViewState("PageNumber") = 1
             ViewState("PageSize") = 5
-            ViewState("RecordCount") = recordCount
-            ltPosition.Text = "Page " & ViewState("PageNumber") & " of " & Math.Floor(recordCount / CInt(ViewState("PageSize")) + 1)
-            InitiateButtonNavigation()
         End If
+
+        ViewState("RecordCount") = _categoryBLL.GetCountCategories(txtSearch.Text)
+        InitiateButtonNavigation()
         pageNumber = CInt(ViewState("PageNumber"))
         pageSize = CInt(ViewState("PageSize"))
 
@@ -91,15 +103,13 @@ Public Class CategoryObjectDSPage
 
     Protected Sub btnNext_Click(sender As Object, e As EventArgs)
 
-        Dim maxPage = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize"))) + 1
-
+        Dim maxPage = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize")) + 1)
         If CInt(ViewState("PageNumber")) < maxPage Then
             ViewState("PageNumber") = CInt(ViewState("PageNumber")) + 1
             gvCategories.DataBind()
         Else
             ltMessage.Text = "<span class='alert alert-danger'>You are on the last page</span>"
         End If
-        ltPosition.Text = "Page " & ViewState("PageNumber") & " of " & maxPage
         InitiateButtonNavigation()
     End Sub
 
@@ -110,7 +120,6 @@ Public Class CategoryObjectDSPage
         Else
             ltMessage.Text = "<span class='alert alert-danger'>You are on the first page</span>"
         End If
-        ltPosition.Text = "Page " & ViewState("PageNumber") & " of " & Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize")) + 1)
         InitiateButtonNavigation()
     End Sub
 End Class

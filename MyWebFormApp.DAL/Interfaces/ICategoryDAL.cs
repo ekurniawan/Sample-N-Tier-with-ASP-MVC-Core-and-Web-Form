@@ -6,7 +6,7 @@ namespace MyWebFormApp.DAL.Interfaces
     public interface ICategoryDAL : ICrud<Category>
     {
         IEnumerable<Category> GetByName(string name);
-        IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize);
-        int GetCountCategories();
+        IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize, string name);
+        int GetCountCategories(string name);
     }
 }

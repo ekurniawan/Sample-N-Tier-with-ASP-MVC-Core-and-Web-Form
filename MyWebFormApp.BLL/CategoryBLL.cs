@@ -81,12 +81,12 @@ namespace MyWebFormApp.BLL
             return listCategoriesDto;
         }
 
-        public int GetCountCategories()
+        public int GetCountCategories(string name)
         {
-            return _categoryDAL.GetCountCategories();
+            return _categoryDAL.GetCountCategories(name);
         }
 
-        public IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize)
+        public IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize, string name)
         {
             /*if (pageNumber <= 0)
             {
@@ -98,7 +98,7 @@ namespace MyWebFormApp.BLL
             }*/
 
             List<CategoryDTO> listCategoriesDto = new List<CategoryDTO>();
-            var categories = _categoryDAL.GetWithPaging(pageNumber, pageSize);
+            var categories = _categoryDAL.GetWithPaging(pageNumber, pageSize, name);
             foreach (var category in categories)
             {
                 listCategoriesDto.Add(new CategoryDTO

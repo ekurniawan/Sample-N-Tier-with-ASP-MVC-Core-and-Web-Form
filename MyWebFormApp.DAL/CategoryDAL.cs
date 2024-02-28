@@ -129,23 +129,27 @@ namespace MyWebFormApp.DAL
 
         }
 
-        public IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize)
+        public IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize, string name)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                var strSql = "select * from Categories order by CategoryName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
-                var param = new { Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
+                var strSql = @"select * from Categories 
+                               where CategoryName like @CategoryName 
+                               order by CategoryName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                var param = new { CategoryName = $"%{name}%", Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
                 var results = conn.Query<Category>(strSql, param);
                 return results;
             }
         }
 
-        public int GetCountCategories()
+        public int GetCountCategories(string name)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                var strSql = @"select count(*) from Categories";
-                var result = Convert.ToInt32(conn.ExecuteScalar(strSql));
+                var strSql = @"select count(*) from Categories 
+                               where CategoryName like @CategoryName";
+                var param = new { CategoryName = $"%{name}%" };
+                var result = Convert.ToInt32(conn.ExecuteScalar(strSql, param));
                 return result;
             }
         }
