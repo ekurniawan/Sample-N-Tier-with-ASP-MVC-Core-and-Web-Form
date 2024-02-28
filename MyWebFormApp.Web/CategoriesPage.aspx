@@ -29,13 +29,18 @@
                                 </div>
                             </div><br />
                             <asp:GridView ID="gvCategories"
-                                CssClass="table table-hover" DataKeyNames="CategoryID" AutoGenerateColumns="false"
-                                OnRowCommand="gvCategories_RowCommand" OnRowDeleting="gvCategories_RowDeleting"
+                                CssClass="table table-hover" DataKeyNames="CategoryID" AutoGenerateColumns="False"
+                                OnRowCommand="gvCategories_RowCommand" OnRowDeleting="gvCategories_RowDeleting" 
                                 runat="server">
                                 <Columns>
                                     <asp:BoundField DataField="CategoryID" HeaderText="ID" />
                                     <asp:BoundField DataField="CategoryName" HeaderText="Name" />
-                                    <asp:CommandField ShowSelectButton="True" ShowDeleteButton="true" />
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:Button ID="Button3" runat="server" CssClass="btn btn-outline-danger btn-sm" CausesValidation="False" CommandName="Delete" Text="Delete" />
+                                            &nbsp;<asp:Button ID="Button2" runat="server" CssClass="btn btn-outline-primary btn-sm" CausesValidation="False" CommandName="Select" Text="Select" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
                             <hr />
