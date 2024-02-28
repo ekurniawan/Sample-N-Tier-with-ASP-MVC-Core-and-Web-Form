@@ -20,8 +20,9 @@
                     </InsertParameters>
                 </asp:ObjectDataSource>--%>
 
-                <asp:GridView ID="gvCategories" ItemType="MyWebFormApp.BLL.DTOs.CategoryDTO" 
-                    SelectMethod="GetAll" UpdateMethod="Update" DataKeyNames="CategoryID,CategoryName" runat="server" AutoGenerateColumns="False">
+                <asp:GridView ID="gvCategories" CssClass="table table-hover" ItemType="MyWebFormApp.BLL.DTOs.CategoryDTO" 
+                    SelectMethod="GetAll" UpdateMethod="Update" DeleteMethod="Delete"
+                        DataKeyNames="CategoryID,CategoryName" runat="server" AutoGenerateColumns="False">
                     <Columns>
                         <asp:TemplateField HeaderText="CategoryName">
                             <ItemTemplate>
@@ -31,7 +32,17 @@
                                 <asp:TextBox ID="txtCategoryName" runat="server" Text='<%# BindItem.CategoryName %>' />
                             </EditItemTemplate>
                         </asp:TemplateField>
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                        <asp:TemplateField ShowHeader="False">
+                            <EditItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" CssClass="btn btn-outline-success btn-sm" runat="server" CausesValidation="True" CommandName="Update" Text="Update"></asp:LinkButton>
+                                &nbsp;<asp:LinkButton ID="LinkButton2" CssClass="btn btn-outline-default btn-sm" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-outline-warning btn-sm" CausesValidation="False" CommandName="Edit" Text="Edit"></asp:LinkButton>
+                                &nbsp;<asp:LinkButton ID="LinkButton2" CssClass="btn btn-outline-danger btn-sm" runat="server" CausesValidation="False" CommandName="Delete"
+                                    OnClientClick="return confirm('Apakah anda yakin untuk delete data ?')" Text="Delete"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView><br />
                 <asp:Label ID="lblKeterangan" runat="server" /><br />

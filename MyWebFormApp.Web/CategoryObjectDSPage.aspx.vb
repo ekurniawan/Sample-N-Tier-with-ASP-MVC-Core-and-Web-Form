@@ -30,5 +30,14 @@ Public Class CategoryObjectDSPage
 
     End Sub
 
-
+    ' The id parameter name should match the DataKeyNames value set on the control
+    Public Sub Delete(CategoryID As Integer)
+        Try
+            _categoryBLL.Delete(CategoryID)
+            lblKeterangan.Text = "Data berhasil dihapus " & CategoryID.ToString()
+            gvCategories.DataBind()
+        Catch ex As Exception
+            lblKeterangan.Text = ex.Message
+        End Try
+    End Sub
 End Class
