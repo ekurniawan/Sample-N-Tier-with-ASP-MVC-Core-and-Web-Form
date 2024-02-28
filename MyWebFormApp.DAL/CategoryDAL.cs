@@ -128,5 +128,26 @@ namespace MyWebFormApp.DAL
             }
 
         }
+
+        public IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = "select * from Categories order by CategoryName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                var param = new { Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
+                var results = conn.Query<Category>(strSql, param);
+                return results;
+            }
+        }
+
+        public int GetCountCategories()
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select count(*) from Categories";
+                var result = Convert.ToInt32(conn.ExecuteScalar(strSql));
+                return result;
+            }
+        }
     }
 }

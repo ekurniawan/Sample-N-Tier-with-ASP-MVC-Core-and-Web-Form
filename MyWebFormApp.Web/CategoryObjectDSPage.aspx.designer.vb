@@ -50,6 +50,33 @@ Partial Public Class CategoryObjectDSPage
     Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
+    '''btnPrev control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPrev As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnNext control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNext As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''ltPosition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltPosition As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''txtCategoryName control.
     '''</summary>
     '''<remarks>

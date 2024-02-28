@@ -81,6 +81,35 @@ namespace MyWebFormApp.BLL
             return listCategoriesDto;
         }
 
+        public int GetCountCategories()
+        {
+            return _categoryDAL.GetCountCategories();
+        }
+
+        public IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize)
+        {
+            /*if (pageNumber <= 0)
+            {
+                throw new ArgumentException("PageNumber is required");
+            }
+            else if (pageSize <= 0)
+            {
+                throw new ArgumentException("PageSize is required");
+            }*/
+
+            List<CategoryDTO> listCategoriesDto = new List<CategoryDTO>();
+            var categories = _categoryDAL.GetWithPaging(pageNumber, pageSize);
+            foreach (var category in categories)
+            {
+                listCategoriesDto.Add(new CategoryDTO
+                {
+                    CategoryID = category.CategoryID,
+                    CategoryName = category.CategoryName
+                });
+            }
+            return listCategoriesDto;
+        }
+
         public void Insert(CategoryCreateDTO entity)
         {
             if (string.IsNullOrEmpty(entity.CategoryName))

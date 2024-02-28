@@ -2,22 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Contoh Object Datasource</h1>
+        <h1 class="h3 mb-0 text-gray-800">Category with Paging</h1>
     </div>
 
     <div class="col-lg-12">
         <!-- Basic Card Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Contoh Object Datasource</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Category With Paging</h6>
             </div>
 
             <div class="card-body">
                 <div class="row">
-                    <asp:Literal ID="ltMessage" runat="server" /><br />
+                    <asp:Literal ID="ltMessage" runat="server" />
                 </div>
-
-                <br />
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row">
@@ -27,7 +25,8 @@
                             <div class="col">
                                 <asp:Button ID="btnSearch" Text="Search" runat="server" CssClass="btn btn-success btn-sm" />
                             </div>
-                        </div><hr />
+                        </div>
+                        <hr />
                         <asp:GridView ID="gvCategories" CssClass="table table-hover" ItemType="MyWebFormApp.BLL.DTOs.CategoryDTO"
                             SelectMethod="GetAll" UpdateMethod="Update" DeleteMethod="Delete"
                             DataKeyNames="CategoryID,CategoryName" runat="server" AutoGenerateColumns="False">
@@ -52,19 +51,19 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
-                        </asp:GridView>
+                        </asp:GridView><br />
+                        <asp:Button ID="btnPrev" Text="Prev" CssClass="btn btn-primary" runat="server" OnClick="btnPrev_Click" />&nbsp;
+                        <asp:Button ID="btnNext" Text="Next" CssClass="btn btn-primary" OnClick="btnNext_Click" runat="server" />&nbsp;
+                        <asp:Literal ID="ltPosition" runat="server" />
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3 mt-3">
                             <label for="txtCategoryName" class="form-label">Cetegory Name :</label>
                             <asp:TextBox ID="txtCategoryName" CssClass="form-control" runat="server" />
                         </div>
-                        <asp:Button Text="Add" ID="btnAdd" class="btn btn-primary btn-sm" runat="server" />
+                        <asp:Button Text="Add" ID="btnAdd" class="btn btn-primary btn-sm" OnClick="btnAdd_Click" runat="server" />
                     </div>
                 </div>
-
             </div>
         </div>
-
-    </div>
 </asp:Content>
