@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="ArticleListManualPage.aspx" />
     <Content Include="ArticleListPage.aspx" />
     <Content Include="ArticlePage.aspx" />
     <Content Include="CategoriesPage.aspx" />
@@ -1924,6 +1925,13 @@
     </Compile>
     <Compile Include="About.aspx.vb">
       <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ArticleListManualPage.aspx.designer.vb">
+      <DependentUpon>ArticleListManualPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticleListManualPage.aspx.vb">
+      <DependentUpon>ArticleListManualPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ArticleListPage.aspx.designer.vb">

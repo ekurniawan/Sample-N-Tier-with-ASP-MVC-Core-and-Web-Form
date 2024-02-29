@@ -28,6 +28,11 @@ Public Class ArticleListPage
             'Dim lnkSelect = CType(e.Item.FindControl("lnkSelect"), LinkButton)
             Dim categoryid = e.CommandArgument.ToString()
             'ltMessage.Text = categoryid
+
+            'jika menggunakan manual / tanpa model binding
+            'Dim results = _articleBLL.GetArticleByCategory(CInt(categoryid))
+            'lvArticles.DataSource = results
+            'lvArticles.DataBind()
         End If
     End Sub
 

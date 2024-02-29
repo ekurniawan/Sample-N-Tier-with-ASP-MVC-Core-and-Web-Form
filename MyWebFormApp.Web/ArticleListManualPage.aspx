@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ArticleListPage.aspx.vb" Inherits="MyWebFormApp.Web.ArticleListPage" %>
-
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ArticleListManualPage.aspx.vb" Inherits="MyWebFormApp.Web.ArticleListManualPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="row">
+        <div class="row">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Articles</h1>
         </div>
@@ -15,18 +14,17 @@
                 <div class="card-body">
                     <asp:Literal ID="ltMessage" runat="server" /><br />
                     <div class="row">
-                        <asp:ListView ID="lvCategories" ItemType="MyWebFormApp.BLL.DTOs.CategoryDTO"
-                            SelectMethod="lvCategories_GetData" DataKeyNames="CategoryID" OnItemCommand="lvCategories_ItemCommand" runat="server">
+                        <asp:ListView ID="lvCategories" DataKeyNames="CategoryID" OnSelectedIndexChanging="lvCategories_SelectedIndexChanging"
+                            OnSelectedIndexChanged="lvCategories_SelectedIndexChanged" runat="server">
                             <ItemTemplate>
                                 <div class="col-lg-2 mb-2">
                                     <asp:LinkButton ID="lnkSelect" Text='<%# Eval("CategoryName") %>' CommandName="Select"
-                                        CommandArgument='<%# Eval("CategoryID") %>'
-                                        runat="server" CssClass="btn btn-outline-info btn-sm" />
+                                        runat="server" CssClass="btn btn-outline-info btn-sm"  />
                                 </div>
                             </ItemTemplate>
                             <SelectedItemTemplate>
                                 <div class="col-lg-2 mb-2">
-                                    <asp:LinkButton ID="lnkSelect" Text='<%# Eval("CategoryName") %>' CommandName="Select"
+                                    <asp:LinkButton ID="lnkSelect" Text='<%# Eval("CategoryName") %>' 
                                         runat="server" CssClass="btn btn-info btn-sm" />
                                 </div>
                             </SelectedItemTemplate>
@@ -34,8 +32,7 @@
                     </div>
                     <br />
                     <table class="table table-hover">
-                        <asp:ListView ID="lvArticles" DataKeyNames="ArticleID" ItemType="MyWebFormApp.BLL.DTOs.ArticleDTO"
-                            SelectMethod="lvArticles_GetData" runat="server">
+                        <asp:ListView ID="lvArticles" DataKeyNames="ArticleID" runat="server">
                             <LayoutTemplate>
                                 <thead>
                                     <tr>
