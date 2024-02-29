@@ -7,18 +7,20 @@ Public Class CategoryObjectDSPage
 
     Dim _categoryBLL As New CategoryBLL()
 
-    Dim pageNumber As Integer
-    Dim pageSize As Integer
-
 #Region "Initiate"
     Sub InitiateButtonNavigation()
-        Dim maxPage = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize")) + 1)
-        Dim cek = CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize"))
-        If cek = 1 Then
+        Dim maxPage = 0
+        Dim pagediv = CInt(ViewState("RecordCount")) Mod CInt(ViewState("PageSize"))
+
+        If CInt(ViewState("RecordCount")) = 0 Then
             maxPage = 1
+        ElseIf pagediv = 0 Then
+            maxPage = CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize"))
+        Else
+            maxPage = Math.Floor(CInt(ViewState("RecordCount")) / CInt(ViewState("PageSize")) + 1)
         End If
 
-        If cek = 1 Then
+        If maxPage = 1 Then
             btnPrev.Enabled = False
             btnNext.Enabled = False
         ElseIf CInt(ViewState("PageNumber")) = 1 Then
@@ -71,8 +73,6 @@ Public Class CategoryObjectDSPage
 
         ViewState("RecordCount") = _categoryBLL.GetCountCategories(txtSearch.Text)
         InitiateButtonNavigation()
-        pageNumber = CInt(ViewState("PageNumber"))
-        pageSize = CInt(ViewState("PageSize"))
 
         'ltMessage.Text = pageNumber & " " & pageSize
     End Sub
@@ -120,6 +120,11 @@ Public Class CategoryObjectDSPage
         Else
             ltMessage.Text = "<span class='alert alert-danger'>You are on the first page</span>"
         End If
+        InitiateButtonNavigation()
+    End Sub
+
+    Protected Sub btnSearch_Click(sender As Object, e As EventArgs)
+        ViewState("PageNumber") = 1
         InitiateButtonNavigation()
     End Sub
 End Class
