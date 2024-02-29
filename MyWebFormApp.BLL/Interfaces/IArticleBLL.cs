@@ -9,5 +9,7 @@ namespace MyWebFormApp.BLL.Interfaces
         IEnumerable<ArticleDTO> GetArticleWithCategory();
         IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId);
         int InsertWithIdentity(ArticleCreateDTO article);
+        void Update(ArticleUpdateDTO article);
+        void Delete(int id);
     }
 }

@@ -19,7 +19,27 @@ namespace MyWebFormApp.DAL
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"delete from Articles where ArticleID = @ArticleID";
+                var param = new { ArticleID = id };
+                try
+                {
+                    int result = conn.Execute(strSql, param);
+                    if (result != 1)
+                    {
+                        throw new Exception("Data tidak berhasil dihapus");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException("Kesalahan: " + ex.Message);
+                }
+            }
         }
 
         public IEnumerable<Article> GetAll()
@@ -122,7 +142,37 @@ namespace MyWebFormApp.DAL
 
         public void Update(Article entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"update Articles set CategoryID=@CategoryID, Title=@Title, Details=@Details, IsApproved=@IsApproved, Pic=@Pic 
+                               where ArticleID=@ArticleID";
+                var param = new
+                {
+                    CategoryID = entity.CategoryID,
+                    Title = entity.Title,
+                    Details = entity.Details,
+                    IsApproved = entity.IsApproved,
+                    Pic = entity.Pic,
+                    ArticleID = entity.ArticleID
+                };
+
+                try
+                {
+                    int result = conn.Execute(strSql, param);
+                    if (result != 1)
+                    {
+                        throw new Exception("Data tidak berhasil diupdate");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException("Kesalahan: " + ex.Message);
+                }
+            }
         }
 
         public IEnumerable<Article> GetArticleByCategory(int categoryId)

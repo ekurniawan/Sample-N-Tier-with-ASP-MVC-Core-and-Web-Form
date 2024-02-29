@@ -102,4 +102,10 @@ Public Class ArticleListManualPage
             ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span><br/><br/>"
         End Try
     End Sub
+
+
+    Protected Sub lvArticles_SelectedIndexChanged(sender As Object, e As EventArgs)
+        ltMessage.Text = lvArticles.SelectedValue.ToString()
+        ltShowModal.Text = "<script>$('#myModal').modal('show');</script>"
+    End Sub
 End Class
