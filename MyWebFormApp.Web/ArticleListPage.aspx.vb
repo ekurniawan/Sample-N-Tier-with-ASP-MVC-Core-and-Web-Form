@@ -1,4 +1,5 @@
-﻿Imports MyWebFormApp.BLL.DTOs
+﻿Imports System.Web.ModelBinding
+Imports MyWebFormApp.BLL.DTOs
 
 Public Class ArticleListPage
     Inherits System.Web.UI.Page
@@ -26,7 +27,7 @@ Public Class ArticleListPage
         If e.CommandName = "Select" Then
             'Dim lnkSelect = CType(e.Item.FindControl("lnkSelect"), LinkButton)
             Dim categoryid = e.CommandArgument.ToString()
-            ltMessage.Text = categoryid
+            'ltMessage.Text = categoryid
         End If
     End Sub
 
@@ -36,7 +37,8 @@ Public Class ArticleListPage
     '     ByVal startRowIndex as Integer
     '     ByRef totalRowCount as Integer
     '     ByVal sortByExpression as String
-    Public Function lvArticles_GetData() As IEnumerable(Of ArticleDTO)
-        Return Nothing
+    Public Function lvArticles_GetData(<Control("lvCategories")> _categoryID As String) As IEnumerable(Of ArticleDTO)
+        Dim results = _articleBLL.GetArticleByCategory(CInt(_categoryID))
+        Return results
     End Function
 End Class

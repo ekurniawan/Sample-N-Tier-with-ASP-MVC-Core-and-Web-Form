@@ -6,5 +6,6 @@ namespace MyWebFormApp.BLL.Interfaces
     public interface IArticleBLL
     {
         IEnumerable<ArticleDTO> GetArticleWithCategory();
+        IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId);
     }
 }

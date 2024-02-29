@@ -32,25 +32,46 @@
                             </SelectedItemTemplate>
                         </asp:ListView>
                     </div>
-                    <hr />
+                    <br />
                     <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Category</th>
-                                <th>Title</th>
-                                <th>Details</th>
-                                <th>Created</th>
-                                <th>Approval</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <asp:ListView ID="lvArticles" ItemType="MyWebFormApp.BLL.DTOs.ArticleDTO"
-                                SelectMethod="lvArticles_GetData" runat="server">
-                                <ItemTemplate></ItemTemplate>
-                            </asp:ListView>
-                        </tbody>
+                        <asp:ListView ID="lvArticles" ItemType="MyWebFormApp.BLL.DTOs.ArticleDTO"
+                            SelectMethod="lvArticles_GetData" runat="server">
+                            <LayoutTemplate>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Category</th>
+                                        <th>Title</th>
+                                        <th>Details</th>
+                                        <th>Created</th>
+                                        <th>Approval</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="itemPlaceholder" runat="server"></tr>
+                                </tbody>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <tr>
+                                    <td><%# Eval("CategoryID") %></td>
+                                    <td><%# Eval("Category.CategoryName") %></td>
+                                    <td><%# Eval("Title") %></td>
+                                    <td><%# Eval("Details") %></td>
+                                    <td><%# Eval("PublishDate", "{0:d}") %></td>
+                                    <td><%# Eval("IsApproved") %></td>
+                                    <td>
+                                        <asp:Image ImageUrl='<%# Eval("Pic", "~/Pics/{0}") %>' Width="100" runat="server" />
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                            <EmptyItemTemplate>
+                                <tr>
+                                    <td colspan="7">No records found</td>
+                                </tr>
+                            </EmptyItemTemplate>
+                        </asp:ListView>
+
                     </table>
 
                 </div>

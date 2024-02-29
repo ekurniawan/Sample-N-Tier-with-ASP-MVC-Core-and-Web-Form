@@ -124,5 +124,22 @@ namespace MyWebFormApp.DAL
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Article> GetArticleByCategory(int categoryId)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+
+                var strSql = @"select a.ArticleID, a.CategoryID, a.Title, a.Details, a.PublishDate, a.IsApproved, a.Pic, c.CategoryID, c.CategoryName from Articles a inner join Categories c on a.CategoryID = c.CategoryID 
+                               where a.CategoryID=@CategoryID";
+                var param = new { CategoryID = categoryId };
+                var results = conn.Query<Article, Category, Article>(strSql, (article, category) =>
+                {
+                    article.Category = category;
+                    return article;
+                }, param, splitOn: "CategoryID");
+                return results;
+            }
+        }
     }
 }

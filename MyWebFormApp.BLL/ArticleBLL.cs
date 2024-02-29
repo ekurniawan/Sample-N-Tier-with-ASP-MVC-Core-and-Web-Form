@@ -14,6 +14,31 @@ namespace MyWebFormApp.BLL
             _articleDAL = new ArticleDAL();
         }
 
+        public IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId)
+        {
+            List<ArticleDTO> articles = new List<ArticleDTO>();
+            var articlesFromDAL = _articleDAL.GetArticleByCategory(categoryId);
+            foreach (var article in articlesFromDAL)
+            {
+                articles.Add(new ArticleDTO
+                {
+                    ArticleID = article.ArticleID,
+                    CategoryID = article.CategoryID,
+                    Title = article.Title,
+                    Details = article.Details,
+                    PublishDate = article.PublishDate,
+                    IsApproved = article.IsApproved,
+                    Pic = article.Pic,
+                    Category = new CategoryDTO
+                    {
+                        CategoryID = article.Category.CategoryID,
+                        CategoryName = article.Category.CategoryName
+                    }
+                });
+            }
+            return articles;
+        }
+
         public IEnumerable<ArticleDTO> GetArticleWithCategory()
         {
             List<ArticleDTO> articles = new List<ArticleDTO>();
