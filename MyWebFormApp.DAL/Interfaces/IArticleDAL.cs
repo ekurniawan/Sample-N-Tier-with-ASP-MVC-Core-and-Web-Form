@@ -7,5 +7,6 @@ namespace MyWebFormApp.DAL.Interfaces
     {
         IEnumerable<Article> GetArticleWithCategory();
         IEnumerable<Article> GetArticleByCategory(int categoryId);
+        int InsertWithIdentity(Article article);
     }
 }

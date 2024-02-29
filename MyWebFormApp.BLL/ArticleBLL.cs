@@ -1,7 +1,9 @@
 ﻿using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
+using MyWebFormApp.BO;
 using MyWebFormApp.DAL;
 using MyWebFormApp.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace MyWebFormApp.BLL
@@ -62,6 +64,65 @@ namespace MyWebFormApp.BLL
                 });
             }
             return articles;
+        }
+
+        public void Insert(ArticleCreateDTO articleDto)
+        {
+            if (string.IsNullOrEmpty(articleDto.Title))
+            {
+                throw new ArgumentException("Title is required");
+            }
+            if (string.IsNullOrEmpty(articleDto.Details))
+            {
+                throw new ArgumentException("Details is required");
+            }
+
+            try
+            {
+                var article = new Article
+                {
+                    CategoryID = articleDto.CategoryID,
+                    Title = articleDto.Title,
+                    Details = articleDto.Details,
+                    IsApproved = articleDto.IsApproved,
+                    Pic = articleDto.Pic
+                };
+                _articleDAL.Insert(article);
+            }
+            catch (System.Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
+        public int InsertWithIdentity(ArticleCreateDTO articleDto)
+        {
+            if (string.IsNullOrEmpty(articleDto.Title))
+            {
+                throw new ArgumentException("Title is required");
+            }
+            if (string.IsNullOrEmpty(articleDto.Details))
+            {
+                throw new ArgumentException("Details is required");
+            }
+
+            try
+            {
+                var article = new Article
+                {
+                    CategoryID = articleDto.CategoryID,
+                    Title = articleDto.Title,
+                    Details = articleDto.Details,
+                    IsApproved = articleDto.IsApproved,
+                    Pic = articleDto.Pic
+                };
+                int result = _articleDAL.InsertWithIdentity(article);
+                return result;
+            }
+            catch (System.Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
     }
 }

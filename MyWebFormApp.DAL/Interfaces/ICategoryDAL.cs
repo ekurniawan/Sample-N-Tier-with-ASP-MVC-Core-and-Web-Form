@@ -8,5 +8,6 @@ namespace MyWebFormApp.DAL.Interfaces
         IEnumerable<Category> GetByName(string name);
         IEnumerable<Category> GetWithPaging(int pageNumber, int pageSize, string name);
         int GetCountCategories(string name);
+        int InsertWithIdentity(Category category);
     }
 }

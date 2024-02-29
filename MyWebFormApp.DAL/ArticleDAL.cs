@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using static Dapper.SqlMapper;
 
 namespace MyWebFormApp.DAL
 {
@@ -90,14 +91,13 @@ namespace MyWebFormApp.DAL
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-                var strSql = @"insert into Articles(CategoryID, Title, Details, PublishDate, IsApproved, Pic) 
-                               values(@CategoryID, @Title, @Details, @PublishDate, @IsApproved, @Pic)";
+                var strSql = @"insert into Articles(CategoryID, Title, Details, IsApproved, Pic) 
+                               values(@CategoryID, @Title, @Details, @IsApproved, @Pic)";
                 var param = new
                 {
                     CategoryID = entity.CategoryID,
                     Title = entity.Title,
                     Details = entity.Details,
-                    PublishDate = entity.PublishDate,
                     IsApproved = entity.IsApproved,
                     Pic = entity.Pic
                 };
@@ -115,7 +115,7 @@ namespace MyWebFormApp.DAL
                 }
                 catch (Exception ex)
                 {
-                    throw new ArgumentException(ex.Message);
+                    throw new ArgumentException("Kesalahan: " + ex.Message);
                 }
             }
         }
@@ -139,6 +139,38 @@ namespace MyWebFormApp.DAL
                     return article;
                 }, param, splitOn: "CategoryID");
                 return results;
+            }
+        }
+
+        public int InsertWithIdentity(Article article)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"insert into Articles(CategoryID, Title, Details, PublishDate, IsApproved, Pic) 
+                               values(@CategoryID, @Title, @Details, @PublishDate, @IsApproved, @Pic);
+                               select @@identity";
+                var param = new
+                {
+                    CategoryID = article.CategoryID,
+                    Title = article.Title,
+                    Details = article.Details,
+                    PublishDate = article.PublishDate,
+                    IsApproved = article.IsApproved,
+                    Pic = article.Pic
+                };
+                try
+                {
+                    int result = Convert.ToInt32(conn.ExecuteScalar(strSql, param));
+                    return result;
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException(ex.Message);
+                }
             }
         }
     }

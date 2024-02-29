@@ -153,5 +153,10 @@ namespace MyWebFormApp.DAL
                 return result;
             }
         }
+
+        public int InsertWithIdentity(Category category)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
