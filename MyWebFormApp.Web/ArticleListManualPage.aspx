@@ -46,6 +46,7 @@
                                 <asp:ListView ID="lvArticles" DataKeyNames="ArticleID"
                                     OnSelectedIndexChanging="lvCategories_SelectedIndexChanging"
                                     OnSelectedIndexChanged="lvArticles_SelectedIndexChanged"
+                                    OnItemCommand="lvArticles_ItemCommand"
                                     runat="server">
                                     <LayoutTemplate>
                                         <thead>
@@ -73,7 +74,10 @@
                                             </td>
                                             <td>
                                                 <asp:LinkButton ID="lnkEdit" Text="Edit" CssClass="btn btn-outline-warning btn-sm"
-                                                    CommandName="Select" runat="server" />
+                                                    CommandName="Select" CommandArgument="Edit" runat="server" />
+                                                <asp:LinkButton ID="lnkDelete" Text="Delete" CssClass="btn btn-outline-danger btn-sm"
+                                                    CommandName="Select" CommandArgument="Delete" 
+                                                    OnClientClick="return confirm('Apakah anda yakin untuk delete data ?')" runat="server" />
                                             </td>
                                         </tr>
                                     </ItemTemplate>

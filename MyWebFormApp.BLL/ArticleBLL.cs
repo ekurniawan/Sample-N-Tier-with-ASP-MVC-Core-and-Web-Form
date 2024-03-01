@@ -18,7 +18,19 @@ namespace MyWebFormApp.BLL
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0)
+            {
+                throw new ArgumentException("ArticleID is required");
+            }
+
+            try
+            {
+                _articleDAL.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId)

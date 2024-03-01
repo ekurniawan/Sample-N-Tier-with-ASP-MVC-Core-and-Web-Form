@@ -20,6 +20,8 @@ Public Class ArticleListManualPage
     End Sub
 
     Sub LoadDataArticles(categoryID As String)
+
+
         Dim _articleBLL As New MyWebFormApp.BLL.ArticleBLL
         Dim results = _articleBLL.GetArticleByCategory(categoryID)
         lvArticles.DataSource = results
@@ -45,7 +47,7 @@ Public Class ArticleListManualPage
                 txtArticleIDEdit.Text = _article.ArticleID
                 txtTitleEdit.Text = _article.Title
                 txtDetailEdit.Text = _article.Details
-                chkApprovedEdit.Checked = If(_article.IsApproved = 1, True, False)
+                chkApprovedEdit.Checked = _article.IsApproved
                 ddCategoriesEdit.SelectedValue = _article.CategoryID
                 lblPic.Text = _article.Pic
             Else
@@ -123,7 +125,7 @@ Public Class ArticleListManualPage
             _article.CategoryID = CInt(ddCategories.SelectedValue)
             _article.Title = txtTitle.Text
             _article.Details = txtDetail.Text
-            _article.IsApproved = If(chkIsApproved.Checked, 1, 0)
+            _article.IsApproved = If(chkApprovedEdit.Checked, 1, 0)
             _article.Pic = fileName
             _articleBLL.Insert(_article)
 
@@ -137,8 +139,22 @@ Public Class ArticleListManualPage
 
     Protected Sub lvArticles_SelectedIndexChanged(sender As Object, e As EventArgs)
         'ltMessage.Text = lvArticles.SelectedValue.ToString()
-        GetEditArticle(CInt(lvArticles.SelectedValue.ToString))
-        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "OpenModalScript", "$(window).on('load',function(){$('#myModalEdit').modal('show');})", True)
+        If ViewState("Command") = "Delete" Then
+            Try
+                Dim _articleBLL As New MyWebFormApp.BLL.ArticleBLL
+                _articleBLL.Delete(CInt(lvArticles.SelectedValue.ToString))
+                lvArticles.DataBind()
+
+                LoadDataArticles(CInt(lvCategories.SelectedValue.ToString))
+                ltMessage.Text = "<span class='alert alert-success'>Artice deleted successfully</span><br/><br/>"
+            Catch ex As Exception
+                ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span><br/><br/>"
+            End Try
+        ElseIf ViewState("Command") = "Edit" Then
+            ltMessage.Text = "<span class='alert alert-success'>Edit</span><br/><br/>"
+            GetEditArticle(CInt(lvArticles.SelectedValue.ToString))
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "OpenModalScript", "$(window).on('load',function(){$('#myModalEdit').modal('show');})", True)
+        End If
     End Sub
 
     Protected Sub btnEdit_Click(sender As Object, e As EventArgs)
@@ -158,14 +174,22 @@ Public Class ArticleListManualPage
             _article.CategoryID = CInt(ddCategoriesEdit.SelectedValue)
             _article.Title = txtTitleEdit.Text
             _article.Details = txtDetailEdit.Text
-            _article.IsApproved = If(chkApprovedEdit.Checked, 1, 0)
+            _article.IsApproved = chkApprovedEdit.Checked
             _article.Pic = If(fpPicEdit.HasFile, fileName, lblPic.Text)
             _articleBLL.Update(_article)
 
+            lvArticles.DataBind()
+
+            LoadDataArticles(CInt(lvCategories.SelectedValue.ToString))
             ltMessage.Text = "<span class='alert alert-success'>Artice updated successfully</span><br/><br/>"
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "CloseModalScript", "$('#myModalEdit').modal('hide');", True)
         Catch ex As Exception
             ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span><br/><br/>"
         End Try
+    End Sub
+
+    Protected Sub lvArticles_ItemCommand(sender As Object, e As ListViewCommandEventArgs)
+        'Dim lvDataItem As ListViewDataItem = CType(e.Item, ListViewDataItem)
+        ViewState("Command") = e.CommandArgument
     End Sub
 End Class
