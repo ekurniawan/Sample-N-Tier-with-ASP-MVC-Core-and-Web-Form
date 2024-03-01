@@ -11,5 +11,6 @@ namespace MyWebFormApp.BLL.Interfaces
         int InsertWithIdentity(ArticleCreateDTO article);
         void Update(ArticleUpdateDTO article);
         void Delete(int id);
+        ArticleDTO GetArticleById(int id);
     }
 }

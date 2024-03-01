@@ -46,6 +46,27 @@ namespace MyWebFormApp.BLL
             return articles;
         }
 
+        public ArticleDTO GetArticleById(int id)
+        {
+            ArticleDTO article = new ArticleDTO();
+            var articleFromDAL = _articleDAL.GetById(id);
+
+            if (articleFromDAL == null)
+            {
+                throw new ArgumentException($"Data article with id:{id} not found");
+            }
+
+            article.ArticleID = articleFromDAL.ArticleID;
+            article.CategoryID = articleFromDAL.CategoryID;
+            article.Title = articleFromDAL.Title;
+            article.Details = articleFromDAL.Details;
+            article.PublishDate = articleFromDAL.PublishDate;
+            article.IsApproved = articleFromDAL.IsApproved;
+            article.Pic = articleFromDAL.Pic;
+
+            return article;
+        }
+
         public IEnumerable<ArticleDTO> GetArticleWithCategory()
         {
             List<ArticleDTO> articles = new List<ArticleDTO>();

@@ -1,4 +1,5 @@
-﻿Imports MyWebFormApp.BLL.DTOs
+﻿Imports MyWebFormApp.BLL
+Imports MyWebFormApp.BLL.DTOs
 
 Public Class ArticleListManualPage
     Inherits System.Web.UI.Page
@@ -25,6 +26,35 @@ Public Class ArticleListManualPage
         lvArticles.DataBind()
     End Sub
 
+
+    Sub GetEditArticle(id As Integer)
+        Dim _categoryBLL As New CategoryBLL
+        Dim _categores = _categoryBLL.GetAll()
+
+        Dim _articleBLL As New MyWebFormApp.BLL.ArticleBLL
+        Dim _article = _articleBLL.GetArticleById(id)
+
+
+        Try
+            ddCategoriesEdit.DataSource = _categores
+            ddCategoriesEdit.DataTextField = "CategoryName"
+            ddCategoriesEdit.DataValueField = "CategoryID"
+            ddCategoriesEdit.DataBind()
+
+            If _article IsNot Nothing Then
+                txtArticleIDEdit.Text = _article.ArticleID
+                txtTitleEdit.Text = _article.Title
+                txtDetailEdit.Text = _article.Details
+                chkApprovedEdit.Checked = If(_article.IsApproved = 1, True, False)
+                ddCategoriesEdit.SelectedValue = _article.CategoryID
+                lblPic.Text = _article.Pic
+            Else
+                ltMessage.Text = "<span class='alert alert-danger'>Error: Article not found</span><br/><br/>"
+            End If
+        Catch ex As Exception
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span><br/><br/>"
+        End Try
+    End Sub
 #End Region
 
 #Region "Validate"
@@ -46,6 +76,7 @@ Public Class ArticleListManualPage
         End Select
     End Function
 #End Region
+
 
 #Region "Initialize"
     Sub InitializeFormAddArticle()
@@ -105,7 +136,36 @@ Public Class ArticleListManualPage
 
 
     Protected Sub lvArticles_SelectedIndexChanged(sender As Object, e As EventArgs)
-        ltMessage.Text = lvArticles.SelectedValue.ToString()
-        ltShowModal.Text = "<script>$('#myModal').modal('show');</script>"
+        'ltMessage.Text = lvArticles.SelectedValue.ToString()
+        GetEditArticle(CInt(lvArticles.SelectedValue.ToString))
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "OpenModalScript", "$(window).on('load',function(){$('#myModalEdit').modal('show');})", True)
+    End Sub
+
+    Protected Sub btnEdit_Click(sender As Object, e As EventArgs)
+        Try
+            'rename upload file
+            Dim fileName As String = Guid.NewGuid.ToString() & fpPicEdit.FileName
+            If fpPicEdit.HasFile Then
+                If CheckFileType(fileName) Then
+                    Dim _path As String = Server.MapPath("~/Pics/")
+                    fpPicEdit.SaveAs(_path & fileName)
+                End If
+            End If
+
+            Dim _articleBLL As New MyWebFormApp.BLL.ArticleBLL
+            Dim _article As New ArticleUpdateDTO
+            _article.ArticleID = CInt(txtArticleIDEdit.Text)
+            _article.CategoryID = CInt(ddCategoriesEdit.SelectedValue)
+            _article.Title = txtTitleEdit.Text
+            _article.Details = txtDetailEdit.Text
+            _article.IsApproved = If(chkApprovedEdit.Checked, 1, 0)
+            _article.Pic = If(fpPicEdit.HasFile, fileName, lblPic.Text)
+            _articleBLL.Update(_article)
+
+            ltMessage.Text = "<span class='alert alert-success'>Artice updated successfully</span><br/><br/>"
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "CloseModalScript", "$('#myModalEdit').modal('hide');", True)
+        Catch ex As Exception
+            ltMessage.Text = "<span class='alert alert-danger'>Error: " & ex.Message & "</span><br/><br/>"
+        End Try
     End Sub
 End Class

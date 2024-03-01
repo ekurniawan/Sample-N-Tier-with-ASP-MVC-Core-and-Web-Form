@@ -41,7 +41,7 @@
 
 
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <table class="table table-hover">
                                 <asp:ListView ID="lvArticles" DataKeyNames="ArticleID"
                                     OnSelectedIndexChanging="lvCategories_SelectedIndexChanging"
@@ -85,7 +85,7 @@
                                 </asp:ListView>
                             </table>
                         </div>
-                        <div class="col-lg-4">
+                        <%--  <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="ddCategories">Category :</label>
@@ -113,10 +113,10 @@
                                 <asp:Button Text="Submit" ID="Button1" CssClass="btn btn-primary btn-sm"
                                     OnClick="btnSubmit_Click" runat="server" />
                             </div>
-                        </div>
+                        </div>--%>
 
 
-                        <!-- The Modal -->
+                        <!-- Modal Add -->
                         <div class="modal" id="myModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -161,9 +161,63 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modal Edit -->
+                        <div class="modal" id="myModalEdit">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Article</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="txtArticleIDEdit">Article ID :</label>
+                                            <asp:TextBox ID="txtArticleIDEdit" Enabled="false" runat="server" CssClass="form-control"
+                                                placeholder="Enter Detail" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ddCategoriesEdit">Category :</label>
+                                            <asp:DropDownList ID="ddCategoriesEdit" CssClass="form-control" runat="server" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtTitleEdit">Title :</label>
+                                            <asp:TextBox ID="txtTitleEdit" runat="server" CssClass="form-control" placeholder="Enter Title" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txtDetailEdit">Details :</label>
+                                            <asp:TextBox ID="txtDetailEdit" runat="server" CssClass="form-control"
+                                                TextMode="MultiLine" placeholder="Enter Detail" />
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <label class="form-check-label">
+                                                <asp:CheckBox ID="chkApprovedEdit" runat="server" CssClass="form-check-input" />
+                                                Is Approved
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fpPic">Picture :</label>
+                                            <asp:Label ID="lblPic" Visible="false" runat="server" />
+                                            <asp:FileUpload ID="fpPicEdit" runat="server" CssClass="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <asp:Button Text="Edit" ID="btnEdit" CssClass="btn btn-primary btn-sm"
+                                            OnClick="btnEdit_Click" runat="server" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
-        <asp:Literal ID="ltShowModal" runat="server" />
 </asp:Content>
