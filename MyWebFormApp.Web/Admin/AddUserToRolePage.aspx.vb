@@ -16,6 +16,8 @@ Public Class AddUserToRolePage
                 If cek.Count = 0 Then
                     Response.Redirect("~/LoginPage.aspx")
                 End If
+            Else
+                Response.Redirect("~/LoginPage.aspx?ReturnUrl=Admin/AddUserToRolePage")
             End If
 
             Dim _userBLL As New UserBLL()

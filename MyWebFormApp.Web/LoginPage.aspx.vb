@@ -13,7 +13,13 @@ Public Class LoginPage
             Dim _userDto = _userBLL.Login(txtUsername.Text, txtPassword.Text)
             If _userDto IsNot Nothing Then
                 Session("User") = _userDto
-                Response.Redirect("~/Default.aspx")
+
+                Dim returnUrl = Request.QueryString("ReturnUrl")
+                If Not String.IsNullOrEmpty(returnUrl) Then
+                    Response.Redirect("~/" & returnUrl)
+                Else
+                    Response.Redirect("~/Default.aspx")
+                End If
             Else
                 ltMessage.Text = "<br/><span class='alert alert-danger'>Error: Invalid Username / Password </span><br/><br/>"
             End If
