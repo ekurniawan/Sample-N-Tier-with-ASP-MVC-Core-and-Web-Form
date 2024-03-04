@@ -11,50 +11,41 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SiteMaster
+Partial Public Class AddUserToRolePage
 
     '''<summary>
-    '''ltMenu control.
+    '''ltMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ltMenu As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents ltMessage As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''ltUsername control.
+    '''ddUser control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ltUsername As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents ddUser As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''pnlAnonymous control.
+    '''ddRole control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents ddRole As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''pnlLoggedIn control.
+    '''btnSubmit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLoggedIn As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''MainContent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
 End Class

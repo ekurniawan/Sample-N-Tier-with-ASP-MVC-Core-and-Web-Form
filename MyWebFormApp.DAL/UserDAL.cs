@@ -88,6 +88,13 @@ namespace MyWebFormApp.DAL
                 {
                     throw new ArgumentException("Username atau Password salah");
                 }
+
+                var strSqlRole = @"select r.* from UsersRoles ur
+                               inner join Roles r on ur.RoleID = r.RoleID
+                               where ur.Username = @Username";
+                var roles = conn.Query<Role>(strSqlRole, param);
+                result.Roles = roles;
+
                 return result;
             }
         }
@@ -105,6 +112,25 @@ namespace MyWebFormApp.DAL
                 var param = new { Username = username };
                 var result = conn.QueryFirstOrDefault<User>(strSql, param);
                 return result;
+            }
+        }
+
+        public IEnumerable<User> GetAllWithRoles()
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select * from Users";
+                var users = conn.Query<User>(strSql);
+                foreach (var user in users)
+                {
+                    strSql = @"select r.* from UserRoles ur
+                               inner join Roles r on ur.RoleId = r.Id
+                               where ur.Username = @Username";
+                    var param = new { Username = user.Username };
+                    var roles = conn.Query<Role>(strSql, param);
+                    user.Roles = roles;
+                }
+                return users;
             }
         }
     }

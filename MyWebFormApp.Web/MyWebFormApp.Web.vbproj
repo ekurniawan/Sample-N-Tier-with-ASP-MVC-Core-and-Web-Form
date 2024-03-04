@@ -137,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Admin\AddUserToRolePage.aspx" />
+    <Content Include="Admin\RolesPage.aspx" />
     <Content Include="ArticleListManualPage.aspx" />
     <Content Include="ArticleListPage.aspx" />
     <Content Include="ArticlePage.aspx" />
@@ -1921,6 +1923,20 @@
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\AddUserToRolePage.aspx.designer.vb">
+      <DependentUpon>AddUserToRolePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddUserToRolePage.aspx.vb">
+      <DependentUpon>AddUserToRolePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RolesPage.aspx.designer.vb">
+      <DependentUpon>RolesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RolesPage.aspx.vb">
+      <DependentUpon>RolesPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="About.aspx.designer.vb">

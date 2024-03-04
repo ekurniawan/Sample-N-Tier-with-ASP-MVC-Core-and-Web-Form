@@ -28,7 +28,21 @@ namespace MyWebFormApp.BLL
 
         public IEnumerable<UserDTO> GetAll()
         {
-            throw new NotImplementedException();
+            var users = userDAL.GetAll();
+            var usersDTO = new List<UserDTO>();
+            foreach (var user in users)
+            {
+                usersDTO.Add(new UserDTO
+                {
+                    Username = user.Username,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Address = user.Address,
+                    Email = user.Email,
+                    Telp = user.Telp
+                });
+            }
+            return usersDTO;
         }
 
         public UserDTO GetByUsername(string username)
@@ -113,6 +127,18 @@ namespace MyWebFormApp.BLL
                 {
                     throw new ArgumentException("Username or Password is wrong");
                 }
+
+                var lstRolesDto = new List<RoleDTO>();
+                var roles = result.Roles;
+                foreach (var role in roles)
+                {
+                    lstRolesDto.Add(new RoleDTO
+                    {
+                        RoleID = role.RoleID,
+                        RoleName = role.RoleName
+                    });
+                }
+
                 UserDTO userDTO = new UserDTO
                 {
                     Username = result.Username,
@@ -120,7 +146,8 @@ namespace MyWebFormApp.BLL
                     LastName = result.LastName,
                     Address = result.Address,
                     Email = result.Email,
-                    Telp = result.Telp
+                    Telp = result.Telp,
+                    Roles = lstRolesDto
                 };
 
                 return userDTO;

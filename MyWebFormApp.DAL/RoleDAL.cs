@@ -71,5 +71,30 @@ namespace MyWebFormApp.DAL
         {
             throw new NotImplementedException();
         }
+
+        public void AddUserToRole(string username, int roleId)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                string strSql = @"insert into UsersRoles(Username, RoleID) values(@Username, @RoleID)";
+                var param = new { Username = username, RoleID = roleId };
+                try
+                {
+                    int result = conn.Execute(strSql, param);
+                    if (result != 1)
+                    {
+                        throw new Exception("Data tidak berhasil ditambahkan");
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                }
+                catch (Exception ex)
+                {
+                    throw new ArgumentException("Kesalahan: " + ex.Message);
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace MyWebFormApp.BLL.DTOs
+﻿using System.Collections.Generic;
+
+namespace MyWebFormApp.BLL.DTOs
 {
     public class UserDTO
     {
@@ -8,5 +10,7 @@
         public string Address { get; set; }
         public string Email { get; set; }
         public string Telp { get; set; }
+
+        public IEnumerable<RoleDTO> Roles { get; set; }
     }
 }
