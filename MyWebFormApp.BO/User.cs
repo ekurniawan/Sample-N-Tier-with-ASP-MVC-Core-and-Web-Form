@@ -16,7 +16,7 @@ namespace MyWebFormApp.BO
         public DateTime LastLogin { get; set; }
         public bool IsLocked { get; set; }
         public byte MaxAttempt { get; set; }
-        public string FirtName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
