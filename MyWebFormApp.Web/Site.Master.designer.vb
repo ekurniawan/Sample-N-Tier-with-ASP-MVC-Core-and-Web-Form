@@ -23,6 +23,24 @@ Partial Public Class SiteMaster
     Protected WithEvents ltUsername As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
+    '''pnlAnonymous control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''pnlLoggedIn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLoggedIn As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''MainContent control.
     '''</summary>
     '''<remarks>

@@ -9,8 +9,12 @@ Public Class SiteMaster
             If Session("User") IsNot Nothing Then
                 Dim _userDto As UserDTO = CType(Session("User"), UserDTO)
                 ltUsername.Text = _userDto.FirstName & " " & _userDto.LastName
+                pnlAnonymous.Visible = False
+                pnlLoggedIn.Visible = True
             Else
                 ltUsername.Text = "Guest"
+                pnlAnonymous.Visible = True
+                pnlLoggedIn.Visible = False
             End If
         End If
     End Sub
