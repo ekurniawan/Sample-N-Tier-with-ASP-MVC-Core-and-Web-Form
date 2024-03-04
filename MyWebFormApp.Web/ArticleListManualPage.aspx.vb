@@ -88,6 +88,10 @@ Public Class ArticleListManualPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            If Session("User") Is Nothing Then
+                Response.Redirect("~/LoginPage.aspx")
+            End If
+
             LoadDataCategories()
         End If
     End Sub

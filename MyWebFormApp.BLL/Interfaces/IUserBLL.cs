@@ -10,5 +10,6 @@ namespace MyWebFormApp.BLL.Interfaces
         IEnumerable<UserDTO> GetAll();
         UserDTO GetByUsername(string username);
         void Insert(UserCreateDTO entity);
+        UserDTO Login(string username, string password);
     }
 }

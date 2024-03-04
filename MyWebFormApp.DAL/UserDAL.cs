@@ -79,7 +79,17 @@ namespace MyWebFormApp.DAL
 
         public User Login(string username, string password)
         {
-            throw new System.NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select * from Users where Username = @Username and Password = @Password";
+                var param = new { Username = username, Password = password };
+                var result = conn.QueryFirstOrDefault<User>(strSql, param);
+                if (result == null)
+                {
+                    throw new ArgumentException("Username atau Password salah");
+                }
+                return result;
+            }
         }
 
         public void Update(User entity)

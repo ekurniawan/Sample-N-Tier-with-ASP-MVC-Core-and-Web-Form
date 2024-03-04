@@ -95,5 +95,40 @@ namespace MyWebFormApp.BLL
                 throw new ArgumentException(ex.Message);
             }
         }
+
+        public UserDTO Login(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("Username is required");
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new ArgumentException("Password is required");
+            }
+            try
+            {
+                var result = userDAL.Login(username, Helper.GetHash(password));
+                if (result == null)
+                {
+                    throw new ArgumentException("Username or Password is wrong");
+                }
+                UserDTO userDTO = new UserDTO
+                {
+                    Username = result.Username,
+                    FirstName = result.FirstName,
+                    LastName = result.LastName,
+                    Address = result.Address,
+                    Email = result.Email,
+                    Telp = result.Telp
+                };
+
+                return userDTO;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
     }
 }
