@@ -11,7 +11,9 @@ namespace MyWebFormApp.BO
         public DateTime PublishDate { get; set; }
         public bool IsApproved { get; set; }
         public string Pic { get; set; }
+        public string Username { get; set; }
 
         public Category Category { get; set; }
+        public User User { get; set; }
     }
 }

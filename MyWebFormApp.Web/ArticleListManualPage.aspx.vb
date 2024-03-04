@@ -20,8 +20,6 @@ Public Class ArticleListManualPage
     End Sub
 
     Sub LoadDataArticles(categoryID As String)
-
-
         Dim _articleBLL As New MyWebFormApp.BLL.ArticleBLL
         Dim results = _articleBLL.GetArticleByCategory(categoryID)
         lvArticles.DataSource = results
