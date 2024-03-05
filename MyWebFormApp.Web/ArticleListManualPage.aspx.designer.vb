@@ -41,6 +41,15 @@ Partial Public Class ArticleListManualPage
     Protected WithEvents lvArticles As Global.System.Web.UI.WebControls.ListView
 
     '''<summary>
+    '''UpdatePanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''ddCategories control.
     '''</summary>
     '''<remarks>

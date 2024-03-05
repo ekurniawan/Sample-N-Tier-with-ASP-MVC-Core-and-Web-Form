@@ -171,6 +171,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CookiePage.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DropDownSample.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="LoginPage.aspx" />
@@ -2044,6 +2045,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DropDownSample.aspx.designer.vb">
+      <DependentUpon>DropDownSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DropDownSample.aspx.vb">
+      <DependentUpon>DropDownSample.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>

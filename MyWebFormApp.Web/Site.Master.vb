@@ -16,9 +16,19 @@ Public Class SiteMaster
                 <li Class='nav-item'>
                     <a Class='nav-link collapsed' href='#'>
                         <i Class='fas fa-fw fa-cog'></i>
+                        <span>Add Category</span>
+                    </a>
+                </li> 
+                <li Class='nav-item'>
+                    <a Class='nav-link collapsed' href='ArticleListManualPage'>
+                        <i Class='fas fa-fw fa-cog'></i>
                         <span>Add Article</span>
                     </a>
-                </li> <hr class='sidebar-divider my-0'>"
+                </li>
+                <hr class='sidebar-divider my-0'>"
+
+
+
 
         Dim _renderReader As String = "<div class='sidebar-heading'>Reader</div>
                 <li Class='nav-item'>

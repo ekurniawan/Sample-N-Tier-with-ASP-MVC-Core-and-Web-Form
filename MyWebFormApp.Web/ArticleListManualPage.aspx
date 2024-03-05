@@ -76,7 +76,7 @@
                                                 <asp:LinkButton ID="lnkEdit" Text="Edit" CssClass="btn btn-outline-warning btn-sm"
                                                     CommandName="Select" CommandArgument="Edit" runat="server" />
                                                 <asp:LinkButton ID="lnkDelete" Text="Delete" CssClass="btn btn-outline-danger btn-sm"
-                                                    CommandName="Select" CommandArgument="Delete" 
+                                                    CommandName="Select" CommandArgument="Delete"
                                                     OnClientClick="return confirm('Apakah anda yakin untuk delete data ?')" runat="server" />
                                             </td>
                                         </tr>
@@ -124,44 +124,51 @@
                         <div class="modal" id="myModal">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Add Article</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
 
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="ddCategories">Category :</label>
-                                            <asp:DropDownList ID="ddCategories" CssClass="form-control" runat="server" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="txtTitle">Title :</label>
-                                            <asp:TextBox ID="txtTitle" runat="server" CssClass="form-control" placeholder="Enter Title" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="txtDetail">Details :</label>
-                                            <asp:TextBox ID="txtDetail" runat="server" CssClass="form-control"
-                                                TextMode="MultiLine" placeholder="Enter Detail" />
-                                        </div>
-                                        <div class="form-group form-check">
-                                            <label class="form-check-label">
-                                                <asp:CheckBox ID="chkIsApproved" runat="server" CssClass="form-check-input" />
-                                                Is Approved
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="fpPic">Picture :</label>
-                                            <asp:FileUpload ID="fpPic" runat="server" CssClass="form-control" />
-                                        </div>
-                                    </div>
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Add Article</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
 
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <asp:Button Text="Submit" ID="btnSubmit" CssClass="btn btn-primary btn-sm"
-                                            OnClick="btnSubmit_Click" runat="server" />
-                                    </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="ddCategories">Category :</label>
+                                                    <asp:DropDownList ID="ddCategories" CssClass="form-control" runat="server" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtTitle">Title :</label>
+                                                    <asp:TextBox ID="txtTitle" runat="server" CssClass="form-control" placeholder="Enter Title" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="txtDetail">Details :</label>
+                                                    <asp:TextBox ID="txtDetail" runat="server" CssClass="form-control"
+                                                        TextMode="MultiLine" placeholder="Enter Detail" />
+                                                </div>
+                                                <div class="form-group form-check">
+                                                    <label class="form-check-label">
+                                                        <asp:CheckBox ID="chkIsApproved" runat="server" CssClass="form-check-input" />
+                                                        Is Approved
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="fpPic">Picture :</label>
+                                                    <asp:FileUpload ID="fpPic" runat="server" CssClass="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <asp:Button Text="Submit" ID="btnSubmit" CssClass="btn btn-primary btn-sm"
+                                                    OnClick="btnSubmit_Click" runat="server" />
+                                            </div>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+
+
                                 </div>
                             </div>
                         </div>
