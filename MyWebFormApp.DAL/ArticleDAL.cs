@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Transactions;
 using static Dapper.SqlMapper;
 
 namespace MyWebFormApp.DAL
@@ -221,6 +222,42 @@ namespace MyWebFormApp.DAL
                 {
                     throw new ArgumentException(ex.Message);
                 }
+            }
+        }
+
+        public void InsertArticleWithCategory(Article article)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+                {
+                    var strSql = @"insert into Categories(CategoryName) values(@CategoryName);
+                                   select @@identity";
+                    var param = new { CategoryName = article.Category.CategoryName };
+                    try
+                    {
+                        int categoryId = Convert.ToInt32(conn.ExecuteScalar(strSql, param));
+                        article.CategoryID = categoryId;
+
+                        var strSql2 = @"insert into Articles(CategoryID, Title, Details, PublishDate, IsApproved, Pic) 
+                                       values(@CategoryID, @Title, @Details, @PublishDate, @IsApproved, @Pic)";
+                        var param2 = new { CategoryID = article.CategoryID, Title = article.Title, Details = article.Details, PublishDate = article.PublishDate, IsApproved = article.IsApproved, Pic = article.Pic };
+                        int result = conn.Execute(strSql2, param2);
+                        if (result != 1)
+                        {
+                            throw new Exception("Data tidak berhasil ditambahkan");
+                        }
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        throw new ArgumentException($"{sqlEx.InnerException.Message} - {sqlEx.Number}");
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ArgumentException(ex.Message);
+                    }
+                }
+                scope.Complete();
             }
         }
     }

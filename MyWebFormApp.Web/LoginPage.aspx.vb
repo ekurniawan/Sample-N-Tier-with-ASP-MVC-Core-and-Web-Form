@@ -15,6 +15,7 @@ Public Class LoginPage
                 Session("User") = _userDto
 
                 Dim returnUrl = Request.QueryString("ReturnUrl")
+
                 If Not String.IsNullOrEmpty(returnUrl) Then
                     Response.Redirect("~/" & returnUrl)
                 Else

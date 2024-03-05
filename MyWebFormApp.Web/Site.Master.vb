@@ -3,7 +3,6 @@
 Public Class SiteMaster
     Inherits MasterPage
 
-
     Function RenderMenu(roleName As String) As String
         Dim _renderAdmin As String = "<div class='sidebar-heading'>Admin</div>
                 <li Class='nav-item'>
