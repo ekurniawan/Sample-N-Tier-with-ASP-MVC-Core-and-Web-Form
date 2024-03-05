@@ -28,8 +28,6 @@ Public Class SiteMaster
                 <hr class='sidebar-divider my-0'>"
 
 
-
-
         Dim _renderReader As String = "<div class='sidebar-heading'>Reader</div>
                 <li Class='nav-item'>
                     <a Class='nav-link collapsed' href='#'>

@@ -171,6 +171,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="CookiePage.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DetailArticlePage.aspx" />
     <Content Include="DropDownSample.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -182,6 +183,7 @@
     <Content Include="ProductsPage.aspx" />
     <Content Include="RegistrationPage.aspx" />
     <Content Include="SampleAJAXPage.aspx" />
+    <Content Include="SampleRepeater.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -2046,6 +2048,13 @@
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DetailArticlePage.aspx.designer.vb">
+      <DependentUpon>DetailArticlePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetailArticlePage.aspx.vb">
+      <DependentUpon>DetailArticlePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="DropDownSample.aspx.designer.vb">
       <DependentUpon>DropDownSample.aspx</DependentUpon>
     </Compile>
@@ -2105,6 +2114,13 @@
     </Compile>
     <Compile Include="SampleAJAXPage.aspx.vb">
       <DependentUpon>SampleAJAXPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SampleRepeater.aspx.designer.vb">
+      <DependentUpon>SampleRepeater.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SampleRepeater.aspx.vb">
+      <DependentUpon>SampleRepeater.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.vb">

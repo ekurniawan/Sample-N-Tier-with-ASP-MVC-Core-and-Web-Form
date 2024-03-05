@@ -20,7 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Startbootstrap/css/sb-admin-2.min.css" rel="stylesheet" runat="server">
-
+    <link href="~/Startbootstrap/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <%--<asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -357,6 +357,10 @@
         <%: Scripts.Render("~/Startbootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js") %>
         <%: Scripts.Render("~/Startbootstrap/vendor/jquery-easing/jquery.easing.min.js") %>
         <%: Scripts.Render("~/Startbootstrap/js/sb-admin-2.min.js") %>
+        <%: Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js") %>
+        <%: Scripts.Render("~/Startbootstrap/vendor/datatables/jquery.dataTables.min.js") %>
+        <%: Scripts.Render("~/Startbootstrap/vendor/datatables/dataTables.bootstrap4.min.js") %>
+
     </asp:PlaceHolder>
 </body>
 </html>
