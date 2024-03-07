@@ -3,7 +3,6 @@ using MyWebFormApp.BO;
 using MyWebFormApp.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Transactions;
 using static Dapper.SqlMapper;
@@ -14,8 +13,9 @@ namespace MyWebFormApp.DAL
     {
         private string GetConnectionString()
         {
+            return Helper.GetConnectionString();
             //return @"Data Source=ACTUAL;Initial Catalog=LatihanDb;Integrated Security=True;TrustServerCertificate=True";
-            return ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
+            //return ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
         }
 
         public void Delete(int id)

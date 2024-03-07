@@ -1,11 +1,5 @@
-﻿@model IEnumerable<SampleMVC.Models.Category>
-@{
-    if (ViewData["users"] == null)
-    {
-        ViewData["users"] = new List<SampleMVC.Models.User>();
-    }
-    var users = ViewData["users"] as List<SampleMVC.Models.User>;
-}
+﻿@model IEnumerable<MyWebFormApp.BLL.DTOs.CategoryDTO>
+
 
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

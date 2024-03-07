@@ -3,7 +3,6 @@ using MyWebFormApp.BO;
 using MyWebFormApp.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 
 namespace MyWebFormApp.DAL
@@ -12,8 +11,14 @@ namespace MyWebFormApp.DAL
     {
         private string GetConnectionString()
         {
-            //return @"Data Source=ACTUAL;Initial Catalog=LatihanDb;Integrated Security=True;TrustServerCertificate=True";
-            return ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
+            /*if (System.Configuration.ConfigurationManager.ConnectionStrings["MyDbConnectionString"] == null)
+            {
+                var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                return MyConfig.GetConnectionString("MyDbConnectionString");
+            }
+            var connString = System.Configuration.ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
+            return connString;*/
+            return Helper.GetConnectionString();
         }
 
         public void Delete(int id)
