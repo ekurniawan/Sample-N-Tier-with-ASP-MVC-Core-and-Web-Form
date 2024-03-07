@@ -13,16 +13,46 @@ public class CategoriesController : Controller
         _categoryBLL = categoryBLL;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int pageNumber = 1, int pageSize = 5, string search = "", string act = "")
     {
         if (TempData["message"] != null)
         {
             ViewData["message"] = TempData["message"];
         }
 
-        var models = _categoryBLL.GetAll();
+        ViewData["search"] = search;
+        var models = _categoryBLL.GetWithPaging(pageNumber, pageSize, search);
+        var maxsize = _categoryBLL.GetCountCategories(search);
+        //return Content($"{pageNumber} - {pageSize} - {search} - {act}");
+
+        if (act == "next")
+        {
+            if (pageNumber * pageSize < maxsize)
+            {
+                pageNumber += 1;
+            }
+            ViewData["pageNumber"] = pageNumber;
+        }
+        else if (act == "prev")
+        {
+            if (pageNumber > 1)
+            {
+                pageNumber -= 1;
+            }
+            ViewData["pageNumber"] = pageNumber;
+        }
+        else
+        {
+            ViewData["pageNumber"] = 2;
+        }
+
+        ViewData["pageSize"] = pageSize;
+        //ViewData["action"] = action;
+
+
         return View(models);
     }
+
 
     public IActionResult Detail(int id)
     {
@@ -79,14 +109,7 @@ public class CategoriesController : Controller
         return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public IActionResult Search(string search)
-    {
-        ViewData["search"] = search;
 
-        var models = _categoryBLL.GetByName(search);
-        return View("Index", models);
-    }
 
     public IActionResult Delete(int id)
     {
