@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
-using SampleMVC.Models;
 
 namespace SampleMVC.Controllers;
 
 public class CategoriesController : Controller
 {
     private readonly ICategoryBLL _categoryBLL;
+
     public CategoriesController(ICategoryBLL categoryBLL)
     {
         _categoryBLL = categoryBLL;
@@ -14,13 +15,19 @@ public class CategoriesController : Controller
 
     public IActionResult Index()
     {
+        if (TempData["message"] != null)
+        {
+            ViewData["message"] = TempData["message"];
+        }
+
         var models = _categoryBLL.GetAll();
         return View(models);
     }
 
     public IActionResult Detail(int id)
     {
-        return View();
+        var model = _categoryBLL.GetById(id);
+        return View(model);
     }
 
     public IActionResult Create()
@@ -29,9 +36,19 @@ public class CategoriesController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Category category)
+    public IActionResult Create(CategoryCreateDTO categoryCreate)
     {
-
+        try
+        {
+            _categoryBLL.Insert(categoryCreate);
+            //ViewData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
+            TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
+        }
+        catch (Exception ex)
+        {
+            //ViewData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
+            TempData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
+        }
         return RedirectToAction("Index");
     }
 
@@ -42,7 +59,7 @@ public class CategoriesController : Controller
     }
 
     [HttpPost]
-    public IActionResult Edit(Category category)
+    public IActionResult Edit(CategoryUpdateDTO categoryEdit)
     {
 
         return RedirectToAction("Index");

@@ -13,6 +13,8 @@
                 <h6 class="m-0 font-weight-bold text-primary">Category Page</h6>
             </div>
             <div class="card-body">
+                @Html.Raw(ViewData["message"])
+
                 <form method="post" class="form-inline" action="/Categories/Search">
                     <p> <input type="text" id="search" class="form-control" name="search"
                             placeholder="search category name" />
