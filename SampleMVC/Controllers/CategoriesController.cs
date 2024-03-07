@@ -54,28 +54,64 @@ public class CategoriesController : Controller
 
     public IActionResult Edit(int id)
     {
-
-        return View();
+        var model = _categoryBLL.GetById(id);
+        if (model == null)
+        {
+            TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Category Not Found !</div>";
+            return RedirectToAction("Index");
+        }
+        return View(model);
     }
 
     [HttpPost]
-    public IActionResult Edit(CategoryUpdateDTO categoryEdit)
+    public IActionResult Edit(int id, CategoryUpdateDTO categoryEdit)
     {
-
+        try
+        {
+            _categoryBLL.Update(categoryEdit);
+            TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Edit Data Category Success !</div>";
+        }
+        catch (Exception ex)
+        {
+            ViewData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
+            return View(categoryEdit);
+        }
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public IActionResult Search(string search)
     {
+        ViewData["search"] = search;
 
-        return View("Index");
-
+        var models = _categoryBLL.GetByName(search);
+        return View("Index", models);
     }
 
     public IActionResult Delete(int id)
     {
+        var model = _categoryBLL.GetById(id);
+        if (model == null)
+        {
+            TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Category Not Found !</div>";
+            return RedirectToAction("Index");
+        }
+        return View(model);
+    }
 
+    [HttpPost]
+    public IActionResult Delete(int id, CategoryDTO category)
+    {
+        try
+        {
+            _categoryBLL.Delete(id);
+            TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Delete Data Category Success !</div>";
+        }
+        catch (Exception ex)
+        {
+            TempData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
+            return View(category);
+        }
         return RedirectToAction("Index");
     }
 

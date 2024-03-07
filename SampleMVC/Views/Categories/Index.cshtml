@@ -15,8 +15,8 @@
             <div class="card-body">
                 @Html.Raw(ViewData["message"])
 
-                <form method="post" class="form-inline" action="/Categories/Search">
-                    <p> <input type="text" id="search" class="form-control" name="search"
+                <form asp-action="Search" class="form-inline">
+                    <p> <input type="text" id="search" class="form-control" name="search" value="@ViewData["search"]"
                             placeholder="search category name" />
                         &nbsp;
                         <input type="submit" class="btn btn-primary btn-sm" value="Search" />
@@ -36,8 +36,8 @@
                         <tr>
                             <td>@category.CategoryID</td>
                             <td>@category.CategoryName</td>
-                            <td><a href="/Categories/Edit/@category.CategoryID" class="btn btn-warning btn-sm">edit</a></td>
-                            <td><a href="/Categories/Delete/@category.CategoryID" class="btn btn-danger btn-sm">delete</a>
+                            <td><a asp-action="Edit" asp-route-id="@category.CategoryID" class="btn btn-warning btn-sm">edit</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@category.CategoryID" class="btn btn-danger btn-sm">delete</a>
                             </td>
                         </tr>
                     }
