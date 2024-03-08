@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CategoryDTO
+@{
     var categories = (List<CategoryDTO>)ViewBag.Categories;
 }
 <div class="row">
@@ -21,7 +22,7 @@
                             <option value="@category.CategoryID">@category.CategoryName</option>
                         }
                     </select>&nbsp; *@
-                    <select name="category" class="form-control"
+                    <select name="CategoryID" class="form-control" asp-for="CategoryID"
                             asp-items="@(new SelectList(categories,"CategoryID", "CategoryName"))"></select>
                     <input type="submit" value="Submit" class="btn btn-primary" />
                 </form>                

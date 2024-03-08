@@ -146,9 +146,9 @@ public class CategoriesController : Controller
     }
 
     [HttpPost]
-    public IActionResult DisplayDropdownList(string category)
+    public IActionResult DisplayDropdownList(string CategoryID)
     {
-        ViewBag.Message = $"You selected {category}";
+        ViewBag.Message = $"You selected {CategoryID}";
 
         ViewBag.Categories = _categoryBLL.GetAll();
 
