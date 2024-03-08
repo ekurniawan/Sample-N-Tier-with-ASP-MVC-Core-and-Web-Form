@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyWebFormApp.BLL;
 namespace SampleMVC.Controllers;
 
 public class HomeController : Controller
@@ -25,5 +26,35 @@ public class HomeController : Controller
     public IActionResult Contact()
     {
         return Content("This is the Contact action method...");
+    }
+
+    //action method for uploading file
+    public IActionResult UploadFilePics()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult UploadFilePics(IFormFile file)
+    {
+        if (file != null)
+        {
+            if (Helper.IsImageFile(file.FileName))
+            {
+                //random file name based on GUID
+                var fileName = $"{Guid.NewGuid()}_{file.FileName}";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "pics", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                ViewBag.Message = @"<div class='alert alert-success'><strong>Success!&nbsp;</strong>File uploaded successfully !</div>";
+            }
+            else
+            {
+                ViewBag.Message = @"<div class='alert alert-danger'><strong>Error!&nbsp;</strong>File is not an image file !</div>";
+            }
+        }
+        return View();
     }
 }

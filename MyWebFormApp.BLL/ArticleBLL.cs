@@ -104,6 +104,29 @@ namespace MyWebFormApp.BLL
             return articles;
         }
 
+        public int GetCountArticles()
+        {
+            return _articleDAL.GetCountArticles();
+        }
+
+        public IEnumerable<Article> GetWithPaging(int categoryId, int pageNumber, int pageSize)
+        {
+            if (categoryId <= 0)
+            {
+                throw new ArgumentException("CategoryID is required");
+            }
+            if (pageNumber <= 0)
+            {
+                throw new ArgumentException("PageNumber is required");
+            }
+            if (pageSize <= 0)
+            {
+                throw new ArgumentException("PageSize is required");
+            }
+
+            return _articleDAL.GetWithPaging(categoryId, pageNumber, pageSize);
+        }
+
         public void Insert(ArticleCreateDTO articleDto)
         {
             if (string.IsNullOrEmpty(articleDto.Title))
