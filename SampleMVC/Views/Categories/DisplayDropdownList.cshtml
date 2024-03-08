@@ -17,6 +17,7 @@
                 @Html.Raw(ViewBag.Message)
                 <form asp-action="DisplayDropdownList" class="form-inline">
                     <select name="CategoryID" class="form-control">
+                        <option value="0">--Select Category--</option>
                         @foreach (var category in categories)
                         {
                             if(Convert.ToInt32(ViewBag.CategoryID) == category.CategoryID)

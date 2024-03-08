@@ -261,22 +261,38 @@ namespace MyWebFormApp.DAL
             }
         }
 
+        //asumsi jika categoryId=0 maka select semua category
         public IEnumerable<Article> GetWithPaging(int categoryId, int pageNumber, int pageSize)
         {
             using (SqlConnection conn = new SqlConnection(GetConnectionString()))
             {
-
-                var strSql = @"select a.*,c.* from Articles a 
+                if (categoryId == 0)
+                {
+                    var strSql = @"select a.*,c.* from Articles a 
+                               inner join Categories c on a.CategoryID = c.CategoryID 
+                               order by CategoryName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+                    var param = new { Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
+                    var results = conn.Query<Article, Category, Article>(strSql, (article, category) =>
+                    {
+                        article.Category = category;
+                        return article;
+                    }, param, splitOn: "CategoryID");
+                    return results;
+                }
+                else
+                {
+                    var strSql = @"select a.*,c.* from Articles a 
                                inner join Categories c on a.CategoryID = c.CategoryID 
                                where a.CategoryID=@CategoryID 
                                order by CategoryName OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
-                var param = new { CategoryID = categoryId, Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
-                var results = conn.Query<Article, Category, Article>(strSql, (article, category) =>
-                {
-                    article.Category = category;
-                    return article;
-                }, param, splitOn: "CategoryID");
-                return results;
+                    var param = new { CategoryID = categoryId, Offset = (pageNumber - 1) * pageSize, PageSize = pageSize };
+                    var results = conn.Query<Article, Category, Article>(strSql, (article, category) =>
+                    {
+                        article.Category = category;
+                        return article;
+                    }, param, splitOn: "CategoryID");
+                    return results;
+                }
             }
         }
 
