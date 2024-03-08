@@ -260,5 +260,15 @@ namespace MyWebFormApp.DAL
                 scope.Complete();
             }
         }
+
+        public IEnumerable<Article> GetWithPaging(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCountArticles()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
