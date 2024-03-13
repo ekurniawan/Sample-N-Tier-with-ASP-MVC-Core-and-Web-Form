@@ -17,7 +17,6 @@ namespace MyWebFormApp.BLL.DTOs
 
         public bool IsApproved { get; set; }
 
-
         public string Pic { get; set; }
     }
 }
