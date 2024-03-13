@@ -138,6 +138,11 @@ namespace MyWebFormApp.BLL
 
         public void Insert(ArticleCreateDTO articleDto)
         {
+            if (articleDto.CategoryID <= 0)
+            {
+                throw new ArgumentException("CategoryID is required");
+            }
+
             if (string.IsNullOrEmpty(articleDto.Title))
             {
                 throw new ArgumentException("Title is required");

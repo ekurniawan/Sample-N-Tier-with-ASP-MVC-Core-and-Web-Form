@@ -44,10 +44,11 @@ namespace SampleMVC.Controllers
         [HttpPost]
         public IActionResult Create(ArticleCreateDTO articleCreateDTO, IFormFile file)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View();
-            //}
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             try
             {
                 if (file != null)

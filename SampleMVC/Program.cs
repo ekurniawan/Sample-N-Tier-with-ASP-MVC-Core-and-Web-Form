@@ -2,7 +2,6 @@ using MyWebFormApp.BLL;
 using MyWebFormApp.BLL.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
-
 //menambahkan modul mvc
 builder.Services.AddControllersWithViews();
 
@@ -17,12 +16,16 @@ builder.Services.AddSession(options =>
 //register DI
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
 builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
+builder.Services.AddScoped<IUserBLL, UserBLL>();
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
