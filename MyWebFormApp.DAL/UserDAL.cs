@@ -123,8 +123,8 @@ namespace MyWebFormApp.DAL
                 var users = conn.Query<User>(strSql);
                 foreach (var user in users)
                 {
-                    strSql = @"select r.* from UserRoles ur
-                               inner join Roles r on ur.RoleId = r.Id
+                    strSql = @"select r.* from UsersRoles ur
+                               inner join Roles r on ur.RoleId = r.RoleId
                                where ur.Username = @Username";
                     var param = new { Username = user.Username };
                     var roles = conn.Query<Role>(strSql, param);
@@ -144,8 +144,8 @@ namespace MyWebFormApp.DAL
 
                 if (user != null)
                 {
-                    strSql = @"select r.* from UserRoles ur
-                               inner join Roles r on ur.RoleId = r.Id
+                    strSql = @"select r.* from UsersRoles ur
+                               inner join Roles r on ur.RoleId = r.RoleId
                                where ur.Username = @Username";
                     var paramRole = new { Username = user.Username };
                     var roles = conn.Query<Role>(strSql, paramRole);

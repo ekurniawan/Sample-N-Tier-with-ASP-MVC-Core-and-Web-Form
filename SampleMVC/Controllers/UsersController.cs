@@ -86,5 +86,11 @@ namespace SampleMVC.Controllers
 
             return View();
         }
+
+        public IActionResult Profile()
+        {
+            var userWithRoles = _userBLL.GetUserWithRoles("ekurniawan");
+            return new JsonResult(userWithRoles);
+        }
     }
 }
