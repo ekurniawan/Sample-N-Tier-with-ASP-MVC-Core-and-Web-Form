@@ -50,6 +50,39 @@ namespace MyWebFormApp.BLL
             throw new NotImplementedException();
         }
 
+        public UserDTO GetUserWithRoles(string username)
+        {
+            var user = userDAL.GetUserWithRoles(username);
+
+            if (user == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+            var userDto = new UserDTO
+            {
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                Email = user.Email,
+                Telp = user.Telp
+            };
+            var lstRolesDto = new List<RoleDTO>();
+            var roles = user.Roles;
+            foreach (var role in roles)
+            {
+                lstRolesDto.Add(new RoleDTO
+                {
+                    RoleID = role.RoleID,
+                    RoleName = role.RoleName
+                });
+            }
+
+            userDto.Roles = lstRolesDto;
+
+            return userDto;
+        }
+
         public void Insert(UserCreateDTO entity)
         {
             if (string.IsNullOrEmpty(entity.Username))

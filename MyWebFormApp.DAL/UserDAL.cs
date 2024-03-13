@@ -133,5 +133,27 @@ namespace MyWebFormApp.DAL
                 return users;
             }
         }
+
+        public User GetUserWithRoles(string username)
+        {
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select * from Users where Username=@Username";
+                var param = new { Username = username };
+                var user = conn.QuerySingleOrDefault<User>(strSql, param);
+
+                if (user != null)
+                {
+                    strSql = @"select r.* from UserRoles ur
+                               inner join Roles r on ur.RoleId = r.Id
+                               where ur.Username = @Username";
+                    var paramRole = new { Username = user.Username };
+                    var roles = conn.Query<Role>(strSql, paramRole);
+                    user.Roles = roles;
+                }
+
+                return user;
+            }
+        }
     }
 }
