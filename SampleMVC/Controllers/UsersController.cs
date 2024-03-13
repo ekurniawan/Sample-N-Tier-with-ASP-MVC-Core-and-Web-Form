@@ -19,6 +19,11 @@ namespace SampleMVC.Controllers
 
         public IActionResult Index()
         {
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+
             var users = _userBLL.GetAll();
             var listUsers = new SelectList(users, "Username", "Username");
             ViewBag.Users = listUsers;
@@ -29,6 +34,21 @@ namespace SampleMVC.Controllers
 
             var usersWithRoles = _userBLL.GetAllWithRoles();
             return View(usersWithRoles);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string Username, int RoleID)
+        {
+            try
+            {
+                _roleBLL.AddUserToRole(Username, RoleID);
+                TempData["Message"] = @"<div class='alert alert-success'><strong>Success!&nbsp;</strong>Role added successfully !</div>";
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = @"<div class='alert alert-danger'><strong>Error!&nbsp;</strong>" + ex.Message + "</div>";
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Login()
@@ -99,6 +119,8 @@ namespace SampleMVC.Controllers
 
             return View();
         }
+
+
 
         public IActionResult Profile()
         {

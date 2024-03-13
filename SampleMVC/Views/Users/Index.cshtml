@@ -16,17 +16,18 @@
                 <h6 class="m-0 font-weight-bold text-primary">List Of User</h6>
             </div>
             <div class="card-body">
-                <form asp-action="AddUserToRole">
+                @Html.Raw(ViewBag.Message)
+                <form asp-action="Index">
                     <div class="form-group">
                         <label for="Username">Username</label>
-                        <select class="form-control"
+                        <select name="Username" class="form-control"
                                 asp-items="@ViewBag.Users">
                             <option value="0">--Select User--</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Roles">Roles</label>
-                        <select class="form-control"
+                        <label for="RoleID">Roles</label>
+                        <select name="RoleID" class="form-control"
                                 asp-items="@ViewBag.Roles">
                             <option value="0">--Select Roles--</option>
                         </select>
