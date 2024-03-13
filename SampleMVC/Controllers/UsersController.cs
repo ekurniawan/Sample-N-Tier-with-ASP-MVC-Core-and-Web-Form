@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
 using System.Text.Json;
@@ -8,13 +9,24 @@ namespace SampleMVC.Controllers
     public class UsersController : Controller
     {
         private readonly IUserBLL _userBLL;
-        public UsersController(IUserBLL userBLL)
+        private readonly IRoleBLL _roleBLL;
+
+        public UsersController(IUserBLL userBLL, IRoleBLL roleBLL)
         {
             _userBLL = userBLL;
+            _roleBLL = roleBLL;
         }
 
         public IActionResult Index()
         {
+            var users = _userBLL.GetAll();
+            var listUsers = new SelectList(users, "Username", "Username");
+            ViewBag.Users = listUsers;
+
+            var roles = _roleBLL.GetAllRoles();
+            var listRoles = new SelectList(roles, "RoleID", "RoleName");
+            ViewBag.Roles = listRoles;
+
             var usersWithRoles = _userBLL.GetAllWithRoles();
             return View(usersWithRoles);
         }

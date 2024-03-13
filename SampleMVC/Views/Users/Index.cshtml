@@ -16,6 +16,20 @@
                 <h6 class="m-0 font-weight-bold text-primary">List Of User</h6>
             </div>
             <div class="card-body">
+                <form asp-action="AddUserToRole">
+                    <div class="form-group">
+                        <label for="Username">Username</label>
+                        <select class="form-control"
+                                asp-items="@ViewBag.Users">
+                            <option value="0">--Select User--</option>
+                        </select><br/>
+                        <label for="Roles">Roles</label>
+                        <select class="form-control"
+                                asp-items="@ViewBag.Roles">
+                            <option value="0">--Select Roles--</option>
+                        </select>
+                    </div>
+                </form>
                 <table class="table table-striped">
                     <thead>
                         <tr>

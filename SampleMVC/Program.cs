@@ -17,6 +17,7 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
 builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
 builder.Services.AddScoped<IUserBLL, UserBLL>();
+builder.Services.AddScoped<IRoleBLL, RoleBLL>();
 
 var app = builder.Build();
 
