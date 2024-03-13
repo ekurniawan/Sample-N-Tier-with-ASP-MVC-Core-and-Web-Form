@@ -22,13 +22,16 @@
                         <select class="form-control"
                                 asp-items="@ViewBag.Users">
                             <option value="0">--Select User--</option>
-                        </select><br/>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="Roles">Roles</label>
                         <select class="form-control"
                                 asp-items="@ViewBag.Roles">
                             <option value="0">--Select Roles--</option>
                         </select>
                     </div>
+                    <input type="Submit" value="Add User To Role" class="btn btn-success btn-sm" /><br/>
                 </form>
                 <table class="table table-striped">
                     <thead>
@@ -80,7 +83,9 @@
                                 <td>
                                     @foreach (var role in item.Roles)
                                     {
-                                        <span class="badge badge-primary">@role.RoleName</span><span> </span>
+                                        <span class="badge badge-primary">@role.RoleName</span>
+
+                                        <span> </span>
                                     }
                                 </td>
                                 <td>
