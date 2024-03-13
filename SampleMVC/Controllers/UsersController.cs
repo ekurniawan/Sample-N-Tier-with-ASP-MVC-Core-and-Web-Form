@@ -15,7 +15,8 @@ namespace SampleMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var usersWithRoles = _userBLL.GetAllWithRoles();
+            return View(usersWithRoles);
         }
 
         public IActionResult Login()
@@ -89,8 +90,9 @@ namespace SampleMVC.Controllers
 
         public IActionResult Profile()
         {
-            var userWithRoles = _userBLL.GetUserWithRoles("ekurniawan");
-            return new JsonResult(userWithRoles);
+            //var userWithRoles = _userBLL.GetUserWithRoles("ekurniawan");
+            var usersWithRoles = _userBLL.GetAllWithRoles();
+            return new JsonResult(usersWithRoles);
         }
     }
 }
