@@ -1,5 +1,4 @@
 ﻿using MyWebFormApp.BLL.DTOs;
-using MyWebFormApp.BO;
 using System.Collections.Generic;
 
 namespace MyWebFormApp.BLL.Interfaces
@@ -13,7 +12,7 @@ namespace MyWebFormApp.BLL.Interfaces
         void Update(ArticleUpdateDTO article);
         void Delete(int id);
         ArticleDTO GetArticleById(int id);
-        IEnumerable<Article> GetWithPaging(int categoryId, int pageNumber, int pageSize);
+        IEnumerable<ArticleDTO> GetWithPaging(int categoryId, int pageNumber, int pageSize);
         int GetCountArticles();
     }
 }

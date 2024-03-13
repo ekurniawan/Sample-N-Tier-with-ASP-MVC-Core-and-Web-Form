@@ -13,6 +13,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Article Page</h6>
                 </div>
                 <div class="card-body">
+                    <asp:Label Text="Category ID:" ID="lblCategory" runat="server" /><br />
                     <asp:SqlDataSource ID="sdsCategories" runat="server" ConnectionString="<%$ ConnectionStrings:MyDbConnectionString %>" 
                         SelectCommand="usp_GetCategories" SelectCommandType="StoredProcedure" />
                     <asp:SqlDataSource ID="sdsArticles" runat="server" 

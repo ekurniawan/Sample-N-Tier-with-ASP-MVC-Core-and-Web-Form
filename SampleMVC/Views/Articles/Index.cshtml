@@ -1,0 +1,64 @@
+﻿@model SampleMVC.ViewModels.ArticlesByCategoryViewModel
+
+<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">List Of Article</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">List Of Article</h6>
+            </div>
+            <div class="card-body">
+                @Html.Raw(ViewBag.Message)
+                <form asp-action="Index" method="get" class="form-inline">
+                    <div class="form-group">
+                        <label asp-for="@Model.CategoryID">Category ID</label>
+                        <select class="form-control" asp-for="@Model.CategoryID"
+                                asp-items="@Model.Categories">
+                            <option value="0">--Select Category--</option>
+                        </select>&nbsp;
+                        <input type="submit" value="Filter" class="btn btn-outline-primary btn-sm" />
+                    </div>
+                </form>
+                <br /><br />
+                <a asp-action="Create" class="btn btn-outline-primary btn-sm">Create New</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Article ID</th>
+                            <th>Category Name</th>
+                            <th>Title</th>
+                            <th>Is Approved</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var article in Model.Articles)
+                        {
+                            <tr>
+                                <td>@article.ArticleID</td>
+                                <td>@article.Category.CategoryName</td>
+                                <td>@article.Title</td>
+                                <td>@article.IsApproved</td>
+                                <td><img src="~/pics/@article.Pic" width="60" /></td>
+                                <td><a asp-action="Edit" asp-route-id="@article.CategoryID" class="btn btn-warning btn-sm">edit</a></td>
+                                <td><a asp-action="Delete" asp-route-id="@article.CategoryID" class="btn btn-danger btn-sm">delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <a class="btn btn-outline-info btn-sm">First</a>&nbsp;
+                <a href="/Articles/Index?act=prev&pageNumber=" class="btn btn-outline-info btn-sm">Prev</a>&nbsp;
+                <a href="/Articles/Index?act=next&pageNumber=" class="btn btn-outline-info btn-sm">Next</a>&nbsp;
+                <a class="btn btn-outline-info btn-sm">Last</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

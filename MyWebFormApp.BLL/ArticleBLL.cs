@@ -109,23 +109,32 @@ namespace MyWebFormApp.BLL
             return _articleDAL.GetCountArticles();
         }
 
-        public IEnumerable<Article> GetWithPaging(int categoryId, int pageNumber, int pageSize)
+        public IEnumerable<ArticleDTO> GetWithPaging(int categoryId, int pageNumber, int pageSize)
         {
-            if (categoryId <= 0)
+            var articles = _articleDAL.GetWithPaging(categoryId, pageNumber, pageSize);
+            List<ArticleDTO> articlesDTO = new List<ArticleDTO>();
+            foreach (var article in articles)
             {
-                throw new ArgumentException("CategoryID is required");
+                articlesDTO.Add(new ArticleDTO
+                {
+                    ArticleID = article.ArticleID,
+                    CategoryID = article.CategoryID,
+                    Title = article.Title,
+                    Details = article.Details,
+                    PublishDate = article.PublishDate,
+                    IsApproved = article.IsApproved,
+                    Pic = article.Pic,
+                    Category = new CategoryDTO
+                    {
+                        CategoryID = article.Category.CategoryID,
+                        CategoryName = article.Category.CategoryName
+                    }
+                });
             }
-            if (pageNumber <= 0)
-            {
-                throw new ArgumentException("PageNumber is required");
-            }
-            if (pageSize <= 0)
-            {
-                throw new ArgumentException("PageSize is required");
-            }
-
-            return _articleDAL.GetWithPaging(categoryId, pageNumber, pageSize);
+            return articlesDTO;
         }
+
+
 
         public void Insert(ArticleCreateDTO articleDto)
         {

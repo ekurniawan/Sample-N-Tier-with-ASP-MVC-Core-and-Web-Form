@@ -235,6 +235,7 @@
     <Content Include="ProductsPage.aspx" />
     <Content Include="RegistrationPage.aspx" />
     <Content Include="SampleAJAXPage.aspx" />
+    <Content Include="SampleDataBound.aspx" />
     <Content Include="SampleRepeater.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -2166,6 +2167,13 @@
     </Compile>
     <Compile Include="SampleAJAXPage.aspx.vb">
       <DependentUpon>SampleAJAXPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SampleDataBound.aspx.designer.vb">
+      <DependentUpon>SampleDataBound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SampleDataBound.aspx.vb">
+      <DependentUpon>SampleDataBound.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="SampleRepeater.aspx.designer.vb">
