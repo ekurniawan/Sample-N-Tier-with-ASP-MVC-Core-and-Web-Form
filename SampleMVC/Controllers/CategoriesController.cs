@@ -15,6 +15,13 @@ public class CategoriesController : Controller
 
     public IActionResult Index(int pageNumber = 1, int pageSize = 5, string search = "", string act = "")
     {
+        //pengecekan session username
+        if (HttpContext.Session.GetString("username") == null)
+        {
+            TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
+            return RedirectToAction("Login", "Users");
+        }
+
         if (TempData["message"] != null)
         {
             ViewData["message"] = TempData["message"];

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MyWebFormApp.BLL.DTOs.LoginDTO
+@{
     Layout=null;
 }
 
@@ -44,15 +45,18 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form asp-action="Login">
+                                        @Html.Raw(ViewBag.Message)
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                   id="exampleInputEmail" aria-describedby="emailHelp"
-                                                   placeholder="Enter Email Address...">
+                                            <input asp-for="Username" class="form-control form-control-user"
+                                                    aria-describedby="emailHelp"
+                                                   placeholder="Enter Email Address..." />
+                                            <span asp-validation-for="Username" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                   id="exampleInputPassword" placeholder="Password">
+                                            <input asp-for="Password" class="form-control form-control-user"
+                                                    placeholder="Password" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -63,9 +67,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type="Submit" value="Login" class="btn btn-primary btn-user btn-block" />
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -86,11 +88,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->

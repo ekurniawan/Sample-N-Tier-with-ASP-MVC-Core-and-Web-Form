@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWebFormApp.BLL;
+using MyWebFormApp.BLL.DTOs;
+using System.Text.Json;
 namespace SampleMVC.Controllers;
 
 public class HomeController : Controller
@@ -7,6 +9,13 @@ public class HomeController : Controller
     // Home/Index
     public IActionResult Index()
     {
+        //check if session not null
+        if (HttpContext.Session.GetString("user") != null)
+        {
+            var userDto = JsonSerializer.Deserialize<UserDTO>(HttpContext.Session.GetString("user"));
+            ViewBag.Message = $"Welcome {userDto.FirstName} {userDto.LastName}";
+        }
+
         ViewData["Title"] = "Home Page";
         return View();
     }
