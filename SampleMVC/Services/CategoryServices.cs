@@ -1,4 +1,4 @@
-﻿using MyWebFormApp.BO;
+﻿using MyWebFormApp.BLL.DTOs;
 using System.Text.Json;
 
 namespace SampleMVC.Services
@@ -13,7 +13,7 @@ namespace SampleMVC.Services
             _client = client;
         }
 
-        public async Task<IEnumerable<Category>> GetAll()
+        public async Task<IEnumerable<CategoryDTO>> GetAll()
         {
             var httpResponse = await _client.GetAsync(BaseUrl);
 
@@ -23,7 +23,7 @@ namespace SampleMVC.Services
             }
 
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var categories = JsonSerializer.Deserialize<IEnumerable<Category>>(content, new JsonSerializerOptions
+            var categories = JsonSerializer.Deserialize<IEnumerable<CategoryDTO>>(content, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });

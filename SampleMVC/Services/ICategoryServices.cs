@@ -1,9 +1,9 @@
-﻿using MyWebFormApp.BO;
+﻿using MyWebFormApp.BLL.DTOs;
 
 namespace SampleMVC.Services
 {
     public interface ICategoryServices
     {
-        Task<IEnumerable<Category>> GetAll();
+        Task<IEnumerable<CategoryDTO>> GetAll();
     }
 }
