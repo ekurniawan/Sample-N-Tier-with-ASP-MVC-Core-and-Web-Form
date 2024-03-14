@@ -1,5 +1,5 @@
 ﻿using MyWebFormApp.BO;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace SampleMVC.Services
 {
@@ -23,7 +23,10 @@ namespace SampleMVC.Services
             }
 
             var content = await httpResponse.Content.ReadAsStringAsync();
-            var categories = JsonConvert.DeserializeObject<List<Category>>(content);
+            var categories = JsonSerializer.Deserialize<IEnumerable<Category>>(content, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
 
             return categories;
         }

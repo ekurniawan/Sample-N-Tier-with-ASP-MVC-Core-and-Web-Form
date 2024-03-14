@@ -16,7 +16,6 @@ Public Class GetCategoryServices
 
             gvCategories.DataSource = listCategories
             gvCategories.DataBind()
-
         End If
     End Sub
 
