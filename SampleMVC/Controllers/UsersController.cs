@@ -10,11 +10,13 @@ namespace SampleMVC.Controllers
     {
         private readonly IUserBLL _userBLL;
         private readonly IRoleBLL _roleBLL;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(IUserBLL userBLL, IRoleBLL roleBLL)
+        public UsersController(IUserBLL userBLL, IRoleBLL roleBLL, ILogger<UsersController> logger)
         {
             _userBLL = userBLL;
             _roleBLL = roleBLL;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -23,6 +25,8 @@ namespace SampleMVC.Controllers
             {
                 ViewBag.Message = TempData["Message"];
             }
+
+            _logger.LogInformation("User open index page");
 
             var users = _userBLL.GetAll();
             var listUsers = new SelectList(users, "Username", "Username");
@@ -35,6 +39,7 @@ namespace SampleMVC.Controllers
             var usersWithRoles = _userBLL.GetAllWithRoles();
             return View(usersWithRoles);
         }
+
 
         [HttpPost]
         public IActionResult Index(string Username, int RoleID)

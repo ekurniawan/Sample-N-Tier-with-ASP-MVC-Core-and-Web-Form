@@ -96,6 +96,12 @@
                         }
                     </tbody>
                 </table>
+
+                <br/>
+                <p id="mypar1"></p>
+                <p></p>
+                <p></p>
+                <input type="button" id="hello" value="Hello" class="btn btn-warning" />
             </div>
         </div>
 
@@ -107,6 +113,12 @@
         <script>
             $(document).ready(function () {
                 $('#tbluser').DataTable();
+
+                $('#hello').click(function () {
+                    alert('Hello');
+                });
+
+                $("p").append("Some appended text.");
             });
         </script>
         <script src="~/startbootstrap/vendor/datatables/jquery.dataTables.min.js"></script>

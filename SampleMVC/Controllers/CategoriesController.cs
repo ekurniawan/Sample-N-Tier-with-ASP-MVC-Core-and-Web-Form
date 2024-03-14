@@ -2,6 +2,8 @@
 using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
 using SampleMVC.Helpers;
+using SampleMVC.Models;
+using SampleMVC.Services;
 using System.Text.Json;
 
 namespace SampleMVC.Controllers;
@@ -9,11 +11,12 @@ namespace SampleMVC.Controllers;
 public class CategoriesController : Controller
 {
     private readonly ICategoryBLL _categoryBLL;
+    private readonly ICategoryServices _categoryServices;
     private UserDTO user = null;
-    public CategoriesController(ICategoryBLL categoryBLL)
+    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices)
     {
         _categoryBLL = categoryBLL;
-
+        _categoryServices = categoryServices;
 
     }
 
@@ -70,6 +73,21 @@ public class CategoriesController : Controller
 
 
         return View(models);
+    }
+
+    public async Task<IActionResult> GetFromServices()
+    {
+        var categories = await _categoryServices.GetAll();
+        List<Category> categoriesList = new List<Category>();
+        foreach (var category in categories)
+        {
+            categoriesList.Add(new Category
+            {
+                categoryID = category.CategoryID,
+                categoryName = category.CategoryName
+            });
+        }
+        return View(categoriesList);
     }
 
 
