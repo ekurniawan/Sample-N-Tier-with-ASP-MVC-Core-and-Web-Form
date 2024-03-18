@@ -1,30 +1,28 @@
-﻿using FluentValidation;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
-using SampleMVC.Extension;
-using SampleMVC.Helpers;
 using SampleMVC.Models;
 using SampleMVC.Services;
 using SampleMVC.ViewModels;
-using System.Text.Json;
-
 namespace SampleMVC.Controllers;
 
+
+[Authorize(Roles = "admin,contributor")]
 public class CategoriesController : Controller
 {
     private readonly ICategoryBLL _categoryBLL;
     private readonly ICategoryServices _categoryServices;
-    private readonly IValidator<CategoryCreateDTO> _validatorCategoryCreateDTO;
+    //private readonly IValidator<CategoryCreateDTO> _validatorCategoryCreateDTO;
 
     private UserDTO user = null;
-    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices,
-        IValidator<CategoryCreateDTO> validatorCategoryCreateDTO)
+    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices/*,IValidator<CategoryCreateDTO> validatorCategoryCreateDTO*/)
     {
         _categoryBLL = categoryBLL;
         _categoryServices = categoryServices;
-        _validatorCategoryCreateDTO = validatorCategoryCreateDTO;
+        //_validatorCategoryCreateDTO = validatorCategoryCreateDTO;
     }
+
 
     public IActionResult Index(int pageNumber = 1, int pageSize = 5, string search = "", string act = "")
     {
@@ -87,6 +85,7 @@ public class CategoriesController : Controller
         return View(categoriesViewModel);
     }
 
+
     public async Task<IActionResult> GetFromServices()
     {
         var categories = await _categoryServices.GetAll();
@@ -105,7 +104,7 @@ public class CategoriesController : Controller
 
     public IActionResult Detail(int id)
     {
-        if (HttpContext.Session.GetString("user") == null)
+        /*if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
             return RedirectToAction("Login", "Users");
@@ -117,12 +116,13 @@ public class CategoriesController : Controller
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda tidak memiliki hak akses !</div>";
             return RedirectToAction("Index", "Home");
-        }
+        }*/
 
         var model = _categoryBLL.GetById(id);
         return View(model);
     }
 
+    [Authorize]
     public IActionResult Create()
     {
 
@@ -146,10 +146,11 @@ public class CategoriesController : Controller
         return PartialView("_CreateCategoryPartial");
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Create(SampleMVC.ViewModels.CategoriesViewModel categoriesViewModel)
     {
-        var result = _validatorCategoryCreateDTO.Validate(categoriesViewModel.CategoryCreateDTO);
+        /*var result = _validatorCategoryCreateDTO.Validate(categoriesViewModel.CategoryCreateDTO);
 
         if (!result.IsValid)
         {
@@ -158,8 +159,9 @@ public class CategoriesController : Controller
             //    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
             //}
             result.AddToModelState(ModelState);
+            //categoriesViewModel.Categories = _categoryBLL.GetWithPaging(1, 5, "");
             return View("Index", categoriesViewModel);
-        }
+        }*/
 
         try
         {
@@ -175,9 +177,10 @@ public class CategoriesController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize]
     public IActionResult Edit(int id)
     {
-        if (HttpContext.Session.GetString("user") == null)
+        /*if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
             return RedirectToAction("Login", "Users");
@@ -189,7 +192,7 @@ public class CategoriesController : Controller
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda tidak memiliki hak akses !</div>";
             return RedirectToAction("Index", "Home");
-        }
+        }*/
 
         var model = _categoryBLL.GetById(id);
         if (model == null)
@@ -200,6 +203,7 @@ public class CategoriesController : Controller
         return View(model);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Edit(int id, CategoryUpdateDTO categoryEdit)
     {
@@ -217,10 +221,10 @@ public class CategoriesController : Controller
     }
 
 
-
+    [Authorize]
     public IActionResult Delete(int id)
     {
-        if (HttpContext.Session.GetString("user") == null)
+        /*if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
             return RedirectToAction("Login", "Users");
@@ -232,7 +236,7 @@ public class CategoriesController : Controller
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda tidak memiliki hak akses !</div>";
             return RedirectToAction("Login", "Users");
-        }
+        }*/
 
         var model = _categoryBLL.GetById(id);
         if (model == null)
@@ -243,6 +247,7 @@ public class CategoriesController : Controller
         return View(model);
     }
 
+    [Authorize]
     [HttpPost]
     public IActionResult Delete(int id, CategoryDTO category)
     {

@@ -1,12 +1,15 @@
-using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using MyWebFormApp.BLL;
-using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
 using SampleMVC.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 //menambahkan modul mvc
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
 
 //register session
 builder.Services.AddSession(options =>
@@ -24,7 +27,7 @@ builder.Services.AddScoped<IRoleBLL, RoleBLL>();
 builder.Services.AddHttpClient<ICategoryServices, CategoryServices>();
 
 //fluent validator
-builder.Services.AddScoped<IValidator<CategoryCreateDTO>, CategoryCreateDTOValidator>();
+//builder.Services.AddScoped<IValidator<CategoryCreateDTO>, CategoryCreateDTOValidator>();
 
 var app = builder.Build();
 
@@ -33,7 +36,9 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
