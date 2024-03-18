@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyWebFormApp.BLL.DTOs.CategoryDTO>
+﻿@model SampleMVC.ViewModels.CategoriesViewModel
 @{
     int pageNumber = 0;
     if(ViewData["pageNumber"] != null)
@@ -30,7 +30,10 @@
                     </p>
                 </form>
 
-                <a asp-action="Create" class="btn btn-success btn-sm">Create New Category</a><br /><br />
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalCreate">
+                    Add Cetegory
+                </button>
+                <partial name="_CreateCategoryPartial" model="Model.CategoryCreateDTO" />
                 <table class="table table-striped">
                     <tr>
                         <th>Category ID</th>
@@ -38,7 +41,7 @@
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
-                    @foreach (var category in Model)
+                    @foreach (var category in Model.Categories)
                     {
                         <tr>
                             <td>@category.CategoryID</td>
@@ -58,9 +61,7 @@
 
             </div>
         </div>
-
     </div>
-
 </div>
 
 

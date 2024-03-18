@@ -6,6 +6,7 @@ using SampleMVC.Extension;
 using SampleMVC.Helpers;
 using SampleMVC.Models;
 using SampleMVC.Services;
+using SampleMVC.ViewModels;
 using System.Text.Json;
 
 namespace SampleMVC.Controllers;
@@ -28,7 +29,7 @@ public class CategoriesController : Controller
     public IActionResult Index(int pageNumber = 1, int pageSize = 5, string search = "", string act = "")
     {
 
-        if (HttpContext.Session.GetString("user") == null)
+        /*if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
             return RedirectToAction("Login", "Users");
@@ -39,7 +40,7 @@ public class CategoriesController : Controller
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda tidak memiliki hak akses !</div>";
             return RedirectToAction("Index", "Home");
-        }
+        }*/
 
 
         if (TempData["message"] != null)
@@ -48,7 +49,13 @@ public class CategoriesController : Controller
         }
 
         ViewData["search"] = search;
-        var models = _categoryBLL.GetWithPaging(pageNumber, pageSize, search);
+
+        CategoriesViewModel categoriesViewModel = new CategoriesViewModel()
+        {
+            Categories = _categoryBLL.GetWithPaging(pageNumber, pageSize, search)
+        };
+
+        //var models = _categoryBLL.GetWithPaging(pageNumber, pageSize, search);
         var maxsize = _categoryBLL.GetCountCategories(search);
         //return Content($"{pageNumber} - {pageSize} - {search} - {act}");
 
@@ -77,7 +84,7 @@ public class CategoriesController : Controller
         //ViewData["action"] = action;
 
 
-        return View(models);
+        return View(categoriesViewModel);
     }
 
     public async Task<IActionResult> GetFromServices()
@@ -119,8 +126,8 @@ public class CategoriesController : Controller
     public IActionResult Create()
     {
 
-
-        if (HttpContext.Session.GetString("user") == null)
+        //pengecekan session username dan role
+        /*if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
             return RedirectToAction("Login", "Users");
@@ -132,15 +139,17 @@ public class CategoriesController : Controller
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda tidak memiliki hak akses !</div>";
             return RedirectToAction("Index", "Home");
-        }
+        }*/
 
-        return View();
+        //return View();
+
+        return PartialView("_CreateCategoryPartial");
     }
 
     [HttpPost]
-    public IActionResult Create(CategoryCreateDTO categoryCreate)
+    public IActionResult Create(SampleMVC.ViewModels.CategoriesViewModel categoriesViewModel)
     {
-        var result = _validatorCategoryCreateDTO.Validate(categoryCreate);
+        var result = _validatorCategoryCreateDTO.Validate(categoriesViewModel.CategoryCreateDTO);
 
         if (!result.IsValid)
         {
@@ -149,12 +158,12 @@ public class CategoriesController : Controller
             //    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
             //}
             result.AddToModelState(ModelState);
-            return View(categoryCreate);
+            return View("Index", categoriesViewModel);
         }
 
         try
         {
-            _categoryBLL.Insert(categoryCreate);
+            _categoryBLL.Insert(categoriesViewModel.CategoryCreateDTO);
             //ViewData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
             TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
         }
