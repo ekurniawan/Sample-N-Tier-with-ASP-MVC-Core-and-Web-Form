@@ -1,3 +1,5 @@
+@model MyWebFormApp.BLL.DTOs.CategoryCreateDTO
+
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Add Category</h1>
@@ -13,9 +15,10 @@
                 @Html.Raw(ViewData["message"])
                 <form method="post" action="/Categories/Create">
                     <div class="form-group">
-                        <label for="CategoryName">Category Name :</label>
-                        <input type="text" class="form-control" name="CategoryName"
+                        <label asp-for="CategoryName">Category Name :</label>
+                        <input asp-for="CategoryName" class="form-control"
                             placeholder="Insert Category Name" />
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
                     </div>
 
                     <input type="Submit" value="Create" class="btn btn-success btn-sm" />

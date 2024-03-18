@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
+using SampleMVC.Extension;
 using SampleMVC.Helpers;
 using SampleMVC.Models;
 using SampleMVC.Services;
@@ -12,12 +14,15 @@ public class CategoriesController : Controller
 {
     private readonly ICategoryBLL _categoryBLL;
     private readonly ICategoryServices _categoryServices;
+    private readonly IValidator<CategoryCreateDTO> _validatorCategoryCreateDTO;
+
     private UserDTO user = null;
-    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices)
+    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices,
+        IValidator<CategoryCreateDTO> validatorCategoryCreateDTO)
     {
         _categoryBLL = categoryBLL;
         _categoryServices = categoryServices;
-
+        _validatorCategoryCreateDTO = validatorCategoryCreateDTO;
     }
 
     public IActionResult Index(int pageNumber = 1, int pageSize = 5, string search = "", string act = "")
@@ -113,6 +118,8 @@ public class CategoriesController : Controller
 
     public IActionResult Create()
     {
+
+
         if (HttpContext.Session.GetString("user") == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Anda harus login terlebih dahulu !</div>";
@@ -133,6 +140,18 @@ public class CategoriesController : Controller
     [HttpPost]
     public IActionResult Create(CategoryCreateDTO categoryCreate)
     {
+        var result = _validatorCategoryCreateDTO.Validate(categoryCreate);
+
+        if (!result.IsValid)
+        {
+            //foreach (var failure in result.Errors)
+            //{
+            //    ModelState.AddModelError(failure.PropertyName, failure.ErrorMessage);
+            //}
+            result.AddToModelState(ModelState);
+            return View(categoryCreate);
+        }
+
         try
         {
             _categoryBLL.Insert(categoryCreate);

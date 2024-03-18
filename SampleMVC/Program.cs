@@ -1,4 +1,6 @@
+using FluentValidation;
 using MyWebFormApp.BLL;
+using MyWebFormApp.BLL.DTOs;
 using MyWebFormApp.BLL.Interfaces;
 using SampleMVC.Services;
 
@@ -20,6 +22,9 @@ builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
 builder.Services.AddScoped<IUserBLL, UserBLL>();
 builder.Services.AddScoped<IRoleBLL, RoleBLL>();
 builder.Services.AddHttpClient<ICategoryServices, CategoryServices>();
+
+//fluent validator
+builder.Services.AddScoped<IValidator<CategoryCreateDTO>, CategoryCreateDTOValidator>();
 
 var app = builder.Build();
 
