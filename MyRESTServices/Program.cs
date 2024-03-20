@@ -1,5 +1,6 @@
 
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using MyRESTServices.BLL;
 using MyRESTServices.BLL.DTOs.Validation;
 using MyRESTServices.BLL.Interfaces;
@@ -20,6 +21,12 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//appdbcontext
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString"));
+});
 
 //DI
 builder.Services.AddScoped<ICategoryData, CategoryData>();
