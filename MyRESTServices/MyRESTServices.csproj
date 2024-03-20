@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MyWebFormApp.BLL\MyWebFormApp.BLL.csproj" />
+    <ProjectReference Include="..\MyRESTServices.BLL\MyRESTServices.BLL.csproj" />
   </ItemGroup>
 
 </Project>

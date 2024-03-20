@@ -1,5 +1,10 @@
-using MyWebFormApp.BLL;
-using MyWebFormApp.BLL.Interfaces;
+
+using FluentValidation;
+using MyRESTServices.BLL;
+using MyRESTServices.BLL.DTOs.Validation;
+using MyRESTServices.BLL.Interfaces;
+using MyRESTServices.Data;
+using MyRESTServices.Data.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +22,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //DI
+builder.Services.AddScoped<ICategoryData, CategoryData>();
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
-builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
+
+//automapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateDTOValidator>();
+
 
 var app = builder.Build();
 

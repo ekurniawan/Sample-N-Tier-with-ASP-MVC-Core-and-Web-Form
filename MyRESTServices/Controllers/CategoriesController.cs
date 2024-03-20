@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyWebFormApp.BLL.DTOs;
-using MyWebFormApp.BLL.Interfaces;
+using MyRESTServices.BLL.DTOs;
+using MyRESTServices.BLL.Interfaces;
 
 namespace MyRESTServices.Controllers
 {
@@ -15,9 +15,9 @@ namespace MyRESTServices.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CategoryDTO> Get()
+        public async Task<IEnumerable<CategoryDTO>> Get()
         {
-            var results = _categoryBLL.GetAll();
+            var results = await _categoryBLL.GetAll();
             return results;
         }
 

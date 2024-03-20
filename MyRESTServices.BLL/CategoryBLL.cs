@@ -1,4 +1,5 @@
-﻿using MyRESTServices.BLL.DTOs;
+﻿using AutoMapper;
+using MyRESTServices.BLL.DTOs;
 using MyRESTServices.BLL.Interfaces;
 using MyRESTServices.Data.Interfaces;
 
@@ -7,9 +8,12 @@ namespace MyRESTServices.BLL
     public class CategoryBLL : ICategoryBLL
     {
         private readonly ICategoryData _categoryData;
-        public CategoryBLL(ICategoryData categoryData)
+        private readonly IMapper _mapper;
+
+        public CategoryBLL(ICategoryData categoryData, IMapper mapper)
         {
             _categoryData = categoryData;
+            _mapper = mapper;
         }
 
         public Task<bool> Delete(int id)
@@ -19,7 +23,9 @@ namespace MyRESTServices.BLL
 
         public async Task<IEnumerable<CategoryDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            var categories = await _categoryData.GetAll();
+            var categoriesDto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return categoriesDto;
         }
 
         public Task<CategoryDTO> GetById(int id)
