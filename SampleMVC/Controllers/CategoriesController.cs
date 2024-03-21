@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MyWebFormApp.BLL.DTOs;
-using MyWebFormApp.BLL.Interfaces;
+using MyRESTServices.BLL.DTOs;
 using SampleMVC.Models;
 using SampleMVC.Services;
 using SampleMVC.ViewModels;
@@ -11,14 +10,12 @@ namespace SampleMVC.Controllers;
 [Authorize(Roles = "admin,contributor")]
 public class CategoriesController : Controller
 {
-    private readonly ICategoryBLL _categoryBLL;
     private readonly ICategoryServices _categoryServices;
     //private readonly IValidator<CategoryCreateDTO> _validatorCategoryCreateDTO;
 
-    private UserDTO user = null;
-    public CategoriesController(ICategoryBLL categoryBLL, ICategoryServices categoryServices/*,IValidator<CategoryCreateDTO> validatorCategoryCreateDTO*/)
+    //private UserDTO user = null;
+    public CategoriesController(ICategoryServices categoryServices)
     {
-        _categoryBLL = categoryBLL;
         _categoryServices = categoryServices;
         //_validatorCategoryCreateDTO = validatorCategoryCreateDTO;
     }
@@ -118,7 +115,7 @@ public class CategoriesController : Controller
             return RedirectToAction("Index", "Home");
         }*/
 
-        var model = _categoryBLL.GetById(id);
+        var model = _categoryServices.GetById(id);
         return View(model);
     }
 
@@ -165,7 +162,7 @@ public class CategoriesController : Controller
 
         try
         {
-            _categoryBLL.Insert(categoriesViewModel.CategoryCreateDTO);
+            _categoryServices.Insert(categoriesViewModel.CategoryCreateDTO);
             //ViewData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
             TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Add Data Category Success !</div>";
         }
@@ -194,7 +191,7 @@ public class CategoriesController : Controller
             return RedirectToAction("Index", "Home");
         }*/
 
-        var model = _categoryBLL.GetById(id);
+        var model = _categoryServices.GetById(id);
         if (model == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Category Not Found !</div>";
@@ -209,7 +206,7 @@ public class CategoriesController : Controller
     {
         try
         {
-            _categoryBLL.Update(categoryEdit);
+            _categoryServices.Update(id, categoryEdit);
             TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Edit Data Category Success !</div>";
         }
         catch (Exception ex)
@@ -238,7 +235,7 @@ public class CategoriesController : Controller
             return RedirectToAction("Login", "Users");
         }*/
 
-        var model = _categoryBLL.GetById(id);
+        var model = _categoryServices.GetById(id);
         if (model == null)
         {
             TempData["message"] = @"<div class='alert alert-danger'><strong>Error!</strong>Category Not Found !</div>";
@@ -253,7 +250,7 @@ public class CategoriesController : Controller
     {
         try
         {
-            _categoryBLL.Delete(id);
+            _categoryServices.Delete(id);
             TempData["message"] = @"<div class='alert alert-success'><strong>Success!</strong>Delete Data Category Success !</div>";
         }
         catch (Exception ex)
@@ -266,7 +263,7 @@ public class CategoriesController : Controller
 
     public IActionResult DisplayDropdownList()
     {
-        var categories = _categoryBLL.GetAll();
+        var categories = _categoryServices.GetAll();
         ViewBag.Categories = categories;
         return View();
     }
@@ -277,7 +274,7 @@ public class CategoriesController : Controller
         ViewBag.CategoryID = CategoryID;
         ViewBag.Message = $"You selected {CategoryID}";
 
-        ViewBag.Categories = _categoryBLL.GetAll();
+        ViewBag.Categories = _categoryServices.GetAll();
 
         return View();
     }

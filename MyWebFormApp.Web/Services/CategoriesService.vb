@@ -19,8 +19,6 @@ Public Class CategoriesService
 
     Public Async Function GetCategories() As Task(Of List(Of Category))
         'get value from web.config with configuration manager
-
-
         Dim listCategories As List(Of Category) = New List(Of Category)
 
         Dim _response As HttpResponseMessage = Await _httpClient.GetAsync(_apiURL & "/Categories")

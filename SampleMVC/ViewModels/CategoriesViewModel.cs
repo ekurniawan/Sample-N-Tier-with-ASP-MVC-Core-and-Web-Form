@@ -1,4 +1,6 @@
-﻿using MyWebFormApp.BLL.DTOs;
+﻿
+
+using MyRESTServices.BLL.DTOs;
 
 namespace SampleMVC.ViewModels
 {

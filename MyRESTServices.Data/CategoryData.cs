@@ -33,7 +33,10 @@ namespace MyRESTServices.Data
 
         public async Task<IEnumerable<Category>> GetAll()
         {
-            var categories = await _context.Categories.OrderBy(c => c.CategoryName).ToListAsync();
+            //var categories = await _context.Categories.OrderBy(c => c.CategoryName).ToListAsync();
+
+            //use sqlraw for ef
+            var categories = await _context.Categories.FromSqlRaw("usp_GetCategories").ToListAsync();
             return categories;
         }
 

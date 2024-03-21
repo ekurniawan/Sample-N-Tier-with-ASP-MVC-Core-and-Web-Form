@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyRESTServices.BLL\MyRESTServices.BLL.csproj" />
     <ProjectReference Include="..\MyWebFormApp.BLL\MyWebFormApp.BLL.csproj" />
   </ItemGroup>
 
