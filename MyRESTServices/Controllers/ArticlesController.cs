@@ -105,7 +105,6 @@ namespace MyRESTServices.Controllers
             };
 
             var article = await _articleBLL.Insert(articleCreateDTO);
-
             return CreatedAtAction(nameof(Get), new { id = article.ArticleID }, article);
         }
 

@@ -21,4 +21,31 @@ Partial Public Class GetCategoryServices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gvCategories As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''ltMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltMessage As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''txtCategoryName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCategoryName As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.System.Web.UI.WebControls.Button
 End Class
