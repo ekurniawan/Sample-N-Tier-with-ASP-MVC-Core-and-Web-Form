@@ -9,7 +9,7 @@ namespace MyRESTServices.BLL.Interfaces
         Task<CategoryDTO> GetById(int id);
         Task<IEnumerable<CategoryDTO>> GetByName(string name);
         Task<CategoryDTO> Insert(CategoryCreateDTO entity);
-        Task<CategoryDTO> Update(CategoryUpdateDTO entity);
+        Task<CategoryDTO> Update(int id, CategoryUpdateDTO entity);
         Task<IEnumerable<CategoryDTO>> GetWithPaging(int pageNumber, int pageSize, string name);
         Task<int> GetCountCategories(string name);
     }

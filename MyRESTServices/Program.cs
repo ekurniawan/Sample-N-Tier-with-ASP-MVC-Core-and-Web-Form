@@ -31,6 +31,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //DI
 builder.Services.AddScoped<ICategoryData, CategoryData>();
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
+builder.Services.AddScoped<IArticleData, ArticleData>();
+builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
 
 //automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

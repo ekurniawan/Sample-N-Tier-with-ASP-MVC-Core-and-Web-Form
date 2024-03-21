@@ -2,6 +2,7 @@
 using MyRESTServices.BLL.DTOs;
 using MyRESTServices.BLL.Interfaces;
 using MyRESTServices.Data.Interfaces;
+using MyRESTServices.Domain.Models;
 
 namespace MyRESTServices.BLL
 {
@@ -16,9 +17,17 @@ namespace MyRESTServices.BLL
             _mapper = mapper;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _categoryData.Delete(id);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<CategoryDTO>> GetAll()
@@ -28,34 +37,61 @@ namespace MyRESTServices.BLL
             return categoriesDto;
         }
 
-        public Task<CategoryDTO> GetById(int id)
+        public async Task<CategoryDTO> GetById(int id)
         {
-            throw new NotImplementedException();
+            var category = await _categoryData.GetById(id);
+            var categoryDto = _mapper.Map<CategoryDTO>(category);
+            return categoryDto;
         }
 
-        public Task<IEnumerable<CategoryDTO>> GetByName(string name)
+        public async Task<IEnumerable<CategoryDTO>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var categories = await _categoryData.GetByName(name);
+            var categoriesDto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return categoriesDto;
         }
 
-        public Task<int> GetCountCategories(string name)
+        public async Task<int> GetCountCategories(string name)
         {
-            throw new NotImplementedException();
+            var count = await _categoryData.GetCountCategories(name);
+            return count;
         }
 
-        public Task<IEnumerable<CategoryDTO>> GetWithPaging(int pageNumber, int pageSize, string name)
+        public async Task<IEnumerable<CategoryDTO>> GetWithPaging(int pageNumber, int pageSize, string name)
         {
-            throw new NotImplementedException();
+            var categories = await _categoryData.GetWithPaging(pageNumber, pageSize, name);
+            var categoriesDto = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
+            return categoriesDto;
         }
 
-        public Task<CategoryDTO> Insert(CategoryCreateDTO entity)
+        public async Task<CategoryDTO> Insert(CategoryCreateDTO entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = _mapper.Map<Category>(entity);
+                var result = await _categoryData.Insert(category);
+                var categoryDto = _mapper.Map<CategoryDTO>(result);
+                return categoryDto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<CategoryDTO> Update(CategoryUpdateDTO entity)
+        public async Task<CategoryDTO> Update(int id, CategoryUpdateDTO entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = _mapper.Map<Category>(entity);
+                await _categoryData.Update(id, category);
+                var categoryDto = _mapper.Map<CategoryDTO>(category);
+                return categoryDto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

@@ -12,9 +12,23 @@ namespace MyRESTServices.Data
             _context = context;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await GetById(id);
+                if (category == null)
+                {
+                    throw new ArgumentException("Category not found");
+                }
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Category>> GetAll()
@@ -23,29 +37,52 @@ namespace MyRESTServices.Data
             return categories;
         }
 
-        public Task<Category> GetById(int id)
+        public async Task<Category> GetById(int id)
         {
-            throw new NotImplementedException();
+            var category = await _context.Categories.FindAsync(id);
+            return category;
         }
 
-        public Task<IEnumerable<Category>> GetByName(string name)
+        public async Task<IEnumerable<Category>> GetByName(string name)
         {
-            throw new NotImplementedException();
+            var categories = await _context.Categories
+                .Where(c => c.CategoryName.Contains(name))
+                .OrderBy(c => c.CategoryName)
+                .ToListAsync();
+            return categories;
         }
 
-        public Task<int> GetCountCategories(string name)
+        public async Task<int> GetCountCategories(string name)
         {
-            throw new NotImplementedException();
+            var count = await _context.Categories
+                .Where(c => c.CategoryName.Contains(name))
+                .CountAsync();
+            return count;
         }
 
-        public Task<IEnumerable<Category>> GetWithPaging(int pageNumber, int pageSize, string name)
+        public async Task<IEnumerable<Category>> GetWithPaging(int pageNumber, int pageSize, string name)
         {
-            throw new NotImplementedException();
+            var categories = await _context.Categories
+                .Where(c => c.CategoryName.Contains(name))
+                .OrderBy(c => c.CategoryName)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return categories;
         }
 
-        public Task<Category> Insert(Category entity)
+        public async Task<Category> Insert(Category entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Categories.Add(entity);
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         public Task<int> InsertWithIdentity(Category category)
@@ -53,9 +90,23 @@ namespace MyRESTServices.Data
             throw new NotImplementedException();
         }
 
-        public Task<Category> Update(int id, Category entity)
+        public async Task<Category> Update(int id, Category entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await GetById(id);
+                if (category == null)
+                {
+                    throw new ArgumentException("Category not found");
+                }
+                category.CategoryName = entity.CategoryName;
+                await _context.SaveChangesAsync();
+                return category;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

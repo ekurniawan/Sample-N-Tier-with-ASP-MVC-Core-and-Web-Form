@@ -6,6 +6,7 @@ namespace MyRESTServices.BLL.Profiles
 {
     public class MapperProfile : Profile
     {
+
         public MapperProfile()
         {
             CreateMap<Category, CategoryDTO>().ReverseMap();
@@ -18,6 +19,8 @@ namespace MyRESTServices.BLL.Profiles
 
             CreateMap<Role, RoleDTO>();
             CreateMap<RoleCreateDTO, Role>();
+
+
         }
     }
 }
