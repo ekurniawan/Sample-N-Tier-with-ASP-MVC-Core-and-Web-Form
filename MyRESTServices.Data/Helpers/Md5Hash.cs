@@ -14,8 +14,21 @@
                 {
                     sb.Append(hashBytes[i].ToString("X2"));
                 }
+                //convert to base64
 
                 return sb.ToString();
+            }
+        }
+
+        //hash with base64 output
+        public static string GetHashBase64(string input)
+        {
+            using (var md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                return System.Convert.ToBase64String(hashBytes);
             }
         }
     }

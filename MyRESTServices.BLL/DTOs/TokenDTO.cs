@@ -1,9 +1,8 @@
 ﻿namespace MyRESTServices.BLL.DTOs
 {
-    public class LoginDTO
+    public class TokenDTO
     {
         public string? Username { get; set; }
-
-        public string? Password { get; set; }
+        public string? Token { get; set; }
     }
 }

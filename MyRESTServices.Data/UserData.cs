@@ -70,6 +70,7 @@ namespace MyRESTServices.Data
         {
             try
             {
+                entity.Password = Helpers.Md5Hash.GetHash(entity.Password);
                 _context.Users.Add(entity);
                 await _context.SaveChangesAsync();
                 return entity;

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyRESTServices.BLL.DTOs;
 using MyRESTServices.BLL.Interfaces;
@@ -22,6 +23,8 @@ namespace MyRESTServices.Controllers
             _validatorCategoryUpdateDto = validatorCategoryUpdateDto;
         }
 
+
+        [Authorize(Roles = "admin,contributor,reader")]
         [HttpGet]
         public async Task<IEnumerable<CategoryDTO>> Get()
         {
@@ -29,6 +32,12 @@ namespace MyRESTServices.Controllers
             return results;
         }
 
+        /// <summary>
+        /// Method to get single Category
+        /// </summary>
+        /// <param name="id">insert Category ID</param>
+        /// <returns>Return single Category</returns>
+        [Authorize(Roles = "admin,contributor,reader")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

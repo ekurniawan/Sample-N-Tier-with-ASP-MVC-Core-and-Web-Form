@@ -44,6 +44,7 @@ namespace MyRESTServices.Data
                 var role = await GetById(id);
                 _context.Roles.Remove(role);
                 await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception ex)
             {

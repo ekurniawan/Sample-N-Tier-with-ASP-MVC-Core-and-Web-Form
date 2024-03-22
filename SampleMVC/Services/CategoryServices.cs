@@ -1,4 +1,5 @@
 ﻿using MyRESTServices.BLL.DTOs;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -24,11 +25,17 @@ namespace SampleMVC.Services
 
         public async Task<IEnumerable<CategoryDTO>> GetAll()
         {
+            _client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InJlYWRlcnVzZXIiLCJyb2xlIjoicmVhZGVyIiwibmJmIjoxNzExMDkzOTQwLCJleHAiOjE3MTExODAzNDAsImlhdCI6MTcxMTA5Mzk0MH0.kvN1-_QYlSI-fT3ADJ94Dn6pURiK9wuEMblK-YPcWF4");
             _logger.LogInformation(GetBaseUrl());
             var httpResponse = await _client.GetAsync(GetBaseUrl());
 
             if (!httpResponse.IsSuccessStatusCode)
             {
+                if (httpResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    throw new Exception("Unauthorized");
+                }
                 throw new Exception("Cannot retrieve category");
             }
 
