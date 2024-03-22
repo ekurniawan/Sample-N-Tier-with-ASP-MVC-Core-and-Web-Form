@@ -57,20 +57,32 @@ namespace MyRESTServices.Data
 
         public async Task<int> GetCountCategories(string name)
         {
-            var count = await _context.Categories
-                .Where(c => c.CategoryName.Contains(name))
+            int count = 0;
+            if (name == "")
+            {
+                count = await _context.Categories
                 .CountAsync();
+            }
+            else
+            {
+                count = await _context.Categories
+           .Where(c => c.CategoryName.Contains(name))
+           .CountAsync();
+            }
+
             return count;
         }
 
         public async Task<IEnumerable<Category>> GetWithPaging(int pageNumber, int pageSize, string name)
         {
+
             var categories = await _context.Categories
-                .Where(c => c.CategoryName.Contains(name))
-                .OrderBy(c => c.CategoryName)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+                 .Where(c => c.CategoryName.Contains(name))
+               .OrderBy(c => c.CategoryName)
+               .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize)
+               .ToListAsync();
+
             return categories;
         }
 

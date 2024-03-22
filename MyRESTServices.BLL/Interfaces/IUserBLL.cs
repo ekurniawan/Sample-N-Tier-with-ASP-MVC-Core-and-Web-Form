@@ -9,8 +9,8 @@ namespace MyRESTServices.BLL.Interfaces
         Task<IEnumerable<UserDTO>> GetAll();
         Task<UserDTO> GetByUsername(string username);
         Task<Task> Insert(UserCreateDTO entity);
-        Task<UserDTO> Login(string username, string password);
-        Task<UserDTO> LoginMVC(LoginDTO loginDTO);
+
+        Task<UserDTO> Login(LoginDTO loginDTO);
 
         Task<UserDTO> GetUserWithRoles(string username);
         Task<IEnumerable<UserDTO>> GetAllWithRoles();

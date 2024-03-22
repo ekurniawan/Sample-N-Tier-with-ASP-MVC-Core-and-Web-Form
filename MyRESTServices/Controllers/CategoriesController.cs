@@ -40,6 +40,22 @@ namespace MyRESTServices.Controllers
             return Ok(result);
         }
 
+
+        [HttpGet("GetWithPaging")]
+        public async Task<IEnumerable<CategoryDTO>> GetWithPaging(int pageNumber, int pageSize, string name = "")
+        {
+
+            var categories = await _categoryBLL.GetWithPaging(pageNumber, pageSize, name);
+            return categories;
+        }
+
+        [HttpGet("GetCountCategories")]
+        public async Task<int> GetCountCategories(string name = "")
+        {
+            var count = await _categoryBLL.GetCountCategories(name);
+            return count;
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(int id, CategoryCreateDTO categoryCreateDTO)
         {
