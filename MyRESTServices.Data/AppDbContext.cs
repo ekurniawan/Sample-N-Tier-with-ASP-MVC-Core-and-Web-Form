@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyRESTServices.Data.Models;
 using MyRESTServices.Domain.Models;
 
 namespace MyRESTServices.Data;
@@ -29,6 +30,10 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //mapping store procedure
+
+        modelBuilder.Entity<usp_GetArticlesByCategoryId>().HasNoKey().ToView(null);
+
         modelBuilder.Entity<Article>(entity =>
         {
             entity.Property(e => e.PublishDate).HasDefaultValueSql("(getdate())");
@@ -82,4 +87,11 @@ public partial class AppDbContext : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        //base.OnConfiguring(optionsBuilder);
+        optionsBuilder
+                .UseSqlServer("Data Source=ACTUAL;Initial Catalog=LatihanDb2;Integrated Security=True;TrustServerCertificate=True;");
+    }
 }

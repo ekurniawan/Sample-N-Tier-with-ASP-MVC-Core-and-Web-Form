@@ -140,6 +140,12 @@ namespace MyRESTServices.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet("ArticleBySP")]
+        public async Task<IEnumerable<usp_GetArticlesByCategoryIdDTO>> GetArticleBySP(int categoryId)
+        {
+            return await _articleBLL.GetArticleByIDSP(categoryId);
+        }
     }
 }
 

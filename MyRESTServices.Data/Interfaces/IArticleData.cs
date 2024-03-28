@@ -1,4 +1,5 @@
-﻿using MyRESTServices.Domain.Models;
+﻿using MyRESTServices.Data.Models;
+using MyRESTServices.Domain.Models;
 
 namespace MyRESTServices.Data.Interfaces
 {
@@ -6,6 +7,7 @@ namespace MyRESTServices.Data.Interfaces
     {
         Task<IEnumerable<Article>> GetArticleWithCategory();
         Task<IEnumerable<Article>> GetArticleByCategory(int categoryId);
+        Task<IEnumerable<usp_GetArticlesByCategoryId>> GetArticleByIDSP(int categoryId);
         Task<IEnumerable<Article>> GetWithPaging(int categoryId, int pageNumber, int pageSize);
 
         Task<int> GetCountArticles();

@@ -14,5 +14,7 @@ namespace MyRESTServices.BLL.Interfaces
         Task<ArticleDTO> GetArticleById(int id);
         Task<IEnumerable<ArticleDTO>> GetWithPaging(int categoryId, int pageNumber, int pageSize);
         Task<int> GetCountArticles();
+
+        Task<IEnumerable<usp_GetArticlesByCategoryIdDTO>> GetArticleByIDSP(int categoryId);
     }
 }

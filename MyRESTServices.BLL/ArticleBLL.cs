@@ -44,6 +44,12 @@ namespace MyRESTServices.BLL
             return articleDto;
         }
 
+        public async Task<IEnumerable<usp_GetArticlesByCategoryIdDTO>> GetArticleByIDSP(int categoryId)
+        {
+            var data = await _articleData.GetArticleByIDSP(categoryId);
+            var articleDtos = _mapper.Map<IEnumerable<usp_GetArticlesByCategoryIdDTO>>(data);
+            return articleDtos;
+        }
 
         public async Task<IEnumerable<ArticleDTO>> GetArticleWithCategory()
         {

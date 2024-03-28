@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyRESTServices.Data.Interfaces;
+using MyRESTServices.Data.Models;
 using MyRESTServices.Domain.Models;
 
 namespace MyRESTServices.Data
@@ -44,6 +45,13 @@ namespace MyRESTServices.Data
                 .OrderBy(a => a.Title)
                 .ToListAsync();
             return articles;
+        }
+
+        public async Task<IEnumerable<usp_GetArticlesByCategoryId>> GetArticleByIDSP(int categoryId)
+        {
+            var result =
+                await _context.Set<usp_GetArticlesByCategoryId>().FromSqlInterpolated($"EXEC usp_GetArticlesByCategoryId {categoryId}").ToListAsync();
+            return result;
         }
 
         public async Task<IEnumerable<Article>> GetArticleWithCategory()
@@ -111,7 +119,7 @@ namespace MyRESTServices.Data
             }
         }
 
-        public Task<int> InsertWithIdentity(Article article)
+        public async Task<int> InsertWithIdentity(Article article)
         {
             throw new NotImplementedException();
         }

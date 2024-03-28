@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MyRESTServices.BLL.DTOs;
+using MyRESTServices.Data.Models;
 using MyRESTServices.Domain.Models;
 
 namespace MyRESTServices.BLL.Profiles
@@ -22,6 +23,8 @@ namespace MyRESTServices.BLL.Profiles
 
             CreateMap<Role, RoleDTO>().ReverseMap();
             CreateMap<RoleCreateDTO, Role>();
+
+            CreateMap<usp_GetArticlesByCategoryId, usp_GetArticlesByCategoryIdDTO>().ReverseMap();
 
 
         }

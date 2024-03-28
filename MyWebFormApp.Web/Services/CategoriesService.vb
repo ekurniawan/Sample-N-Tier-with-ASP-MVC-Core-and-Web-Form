@@ -10,6 +10,7 @@ Public Class CategoriesService
 
     Public Sub New()
         _httpClient = New HttpClient
+
         _apiURL = ConfigurationManager.AppSettings("apiURL")
     End Sub
 
@@ -34,6 +35,7 @@ Public Class CategoriesService
         Dim json = JsonConvert.SerializeObject(category)
         Dim content = New StringContent(json, System.Text.Encoding.UTF8, "application/json")
         Try
+            _httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " & HttpContext.Current.Session("token"))
             Dim _response = Await _httpClient.PostAsync(_apiURL & "/Categories", content)
             If _response.IsSuccessStatusCode Then
                 Return True
