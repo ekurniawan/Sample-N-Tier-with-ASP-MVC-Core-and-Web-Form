@@ -1,0 +1,30 @@
+﻿@model SampleMVC.ViewModels.CategoriesViewModel
+
+ <!-- Modal Create -->
+<div class="modal" id="myModalCreate">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create Category</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <form asp-action="Create">
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="CategoryCreateDTO.CategoryName">Category Name :</label>
+                        <input asp-for="CategoryCreateDTO.CategoryName" class="form-control"
+                               placeholder="Insert Category Name" />
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <input type="Submit" value="Create" class="btn btn-success btn-sm" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

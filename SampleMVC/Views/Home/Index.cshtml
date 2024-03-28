@@ -11,7 +11,12 @@
             </div>
             <div class="card-body">
                 Welcome to the home page of the application. This is the first page that the user will see when they log
-                in.
+                in.<br/>
+                @ViewBag.Message
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <p>Username: @User.Identity.Name</p>
+                }
             </div>
         </div>
 

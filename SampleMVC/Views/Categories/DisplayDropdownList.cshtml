@@ -1,0 +1,42 @@
+﻿@model CategoryDTO
+@{
+    var categories = (List<CategoryDTO>)ViewBag.Categories;
+}
+<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Sample Dropdown List</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Sample Dropdown List</h6>
+            </div>
+            <div class="card-body">
+                @Html.Raw(ViewBag.Message)
+                <form asp-action="DisplayDropdownList" class="form-inline">
+                    <select name="CategoryID" class="form-control">
+                        <option value="0">--Select Category--</option>
+                        @foreach (var category in categories)
+                        {
+                            if(Convert.ToInt32(ViewBag.CategoryID) == category.CategoryID)
+                            {
+                                <option value="@category.CategoryID" selected="selected">@category.CategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@category.CategoryID">@category.CategoryName</option>
+                            }
+                        }
+                    </select>&nbsp;
+
+                    @* <select name="CategoryID" class="form-control" asp-for="CategoryID"
+                            asp-items="@(new SelectList(categories,"CategoryID", "CategoryName"))"></select> *@
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </form>                
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -13,5 +13,7 @@ namespace MyWebFormApp.BLL.Interfaces
         void Update(CategoryUpdateDTO entity);
         IEnumerable<CategoryDTO> GetWithPaging(int pageNumber, int pageSize, string name);
         int GetCountCategories(string name);
+
+
     }
 }

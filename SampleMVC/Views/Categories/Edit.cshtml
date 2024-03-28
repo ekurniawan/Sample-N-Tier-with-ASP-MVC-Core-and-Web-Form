@@ -1,6 +1,3 @@
-@model SampleMVC.Models.Category
-
-
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Edit Category</h1>
@@ -13,7 +10,8 @@
                 <h6 class="m-0 font-weight-bold text-primary">Edit Category</h6>
             </div>
             <div class="card-body">
-                <form method="post" action="/Categories/Edit">
+                @Html.Raw(ViewData["message"])
+                <form asp-action="Edit">
                     <div class="form-group">
                         <label for="CategoryID">Category ID :</label>
                         <input type="text" class="form-control" name="CategoryID" readonly value="@Model.CategoryID" />

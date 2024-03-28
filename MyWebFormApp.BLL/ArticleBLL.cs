@@ -104,8 +104,45 @@ namespace MyWebFormApp.BLL
             return articles;
         }
 
+        public int GetCountArticles()
+        {
+            return _articleDAL.GetCountArticles();
+        }
+
+        public IEnumerable<ArticleDTO> GetWithPaging(int categoryId, int pageNumber, int pageSize)
+        {
+            var articles = _articleDAL.GetWithPaging(categoryId, pageNumber, pageSize);
+            List<ArticleDTO> articlesDTO = new List<ArticleDTO>();
+            foreach (var article in articles)
+            {
+                articlesDTO.Add(new ArticleDTO
+                {
+                    ArticleID = article.ArticleID,
+                    CategoryID = article.CategoryID,
+                    Title = article.Title,
+                    Details = article.Details,
+                    PublishDate = article.PublishDate,
+                    IsApproved = article.IsApproved,
+                    Pic = article.Pic,
+                    Category = new CategoryDTO
+                    {
+                        CategoryID = article.Category.CategoryID,
+                        CategoryName = article.Category.CategoryName
+                    }
+                });
+            }
+            return articlesDTO;
+        }
+
+
+
         public void Insert(ArticleCreateDTO articleDto)
         {
+            if (articleDto.CategoryID <= 0)
+            {
+                throw new ArgumentException("CategoryID is required");
+            }
+
             if (string.IsNullOrEmpty(articleDto.Title))
             {
                 throw new ArgumentException("Title is required");

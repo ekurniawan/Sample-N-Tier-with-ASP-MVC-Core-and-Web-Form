@@ -1,5 +1,11 @@
-﻿@model IEnumerable<MyWebFormApp.BLL.DTOs.CategoryDTO>
-
+﻿@model SampleMVC.ViewModels.CategoriesViewModel
+@{
+    int pageNumber = 1;
+    if(ViewData["pageNumber"] != null)
+    {
+        pageNumber = Convert.ToInt32(ViewData["pageNumber"]);
+    }
+}
 
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -13,15 +19,21 @@
                 <h6 class="m-0 font-weight-bold text-primary">Category Page</h6>
             </div>
             <div class="card-body">
-                <form method="post" class="form-inline" action="/Categories/Search">
-                    <p> <input type="text" id="search" class="form-control" name="search"
-                            placeholder="search category name" />
+                @Html.Raw(ViewData["message"])
+
+                <form asp-action="Index" method="get" class="form-inline">
+                    <p>
+                        <input type="text" id="search" class="form-control" name="search" value="@ViewData["search"]"
+                               placeholder="search category name" />
                         &nbsp;
                         <input type="submit" class="btn btn-primary btn-sm" value="Search" />
                     </p>
                 </form>
 
-                <a href="/Categories/Create" class="btn btn-success btn-sm">Create New Category</a>&nbsp;
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModalCreate">
+                    Add Cetegory
+                </button>
+                <partial name="_CreateCategoryPartial" model="Model.CategoryCreateDTO" />
                 <table class="table table-striped">
                     <tr>
                         <th>Category ID</th>
@@ -29,20 +41,28 @@
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
-                    @foreach (var category in Model)
+                    @foreach (var category in Model.Categories)
                     {
                         <tr>
                             <td>@category.CategoryID</td>
                             <td>@category.CategoryName</td>
-                            <td><a href="/Categories/Edit/@category.CategoryID" class="btn btn-warning btn-sm">edit</a></td>
-                            <td><a href="/Categories/Delete/@category.CategoryID" class="btn btn-danger btn-sm">delete</a>
+                            <td><a asp-action="Edit" asp-route-id="@category.CategoryID" class="btn btn-warning btn-sm">edit</a></td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@category.CategoryID" class="btn btn-danger btn-sm">delete</a>
                             </td>
                         </tr>
                     }
                 </table>
+
+                <a class="btn btn-outline-info btn-sm">First</a>&nbsp;
+                <a href="/Categories/Index?act=prev&pageNumber=@pageNumber" class="btn btn-outline-info btn-sm">Prev</a>&nbsp;
+                <a href="/Categories/Index?act=next&pageNumber=@pageNumber" class="btn btn-outline-info btn-sm">Next</a>&nbsp;
+                <a class="btn btn-outline-info btn-sm">Last</a>
+
             </div>
         </div>
-
     </div>
-
 </div>
+
+
+

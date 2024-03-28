@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\pics\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MyRESTServices.BLL\MyRESTServices.BLL.csproj" />
     <ProjectReference Include="..\MyWebFormApp.BLL\MyWebFormApp.BLL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="Dapper" Version="2.1.28" />
   </ItemGroup>

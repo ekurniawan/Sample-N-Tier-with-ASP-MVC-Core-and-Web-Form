@@ -1,5 +1,4 @@
-@model SampleMVC.Models.Category
-
+@model MyRESTServices.BLL.DTOs.CategoryCreateDTO
 
 <div class="row">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -13,23 +12,23 @@
                 <h6 class="m-0 font-weight-bold text-primary">Add Category</h6>
             </div>
             <div class="card-body">
+                @Html.Raw(ViewData["message"])
                 <form method="post" action="/Categories/Create">
                     <div class="form-group">
-                        <label for="CategoryID">Category ID :</label>
-                        <input type="text" class="form-control" name="CategoryID" placeholder="Insert Category ID" />
-                    </div>
-                    <div class="form-group">
-                        <label for="CategoryName">Category Name :</label>
-                        <input type="text" class="form-control" name="CategoryName"
+                        <label asp-for="CategoryName">Category Name :</label>
+                        <input asp-for="CategoryName" class="form-control"
                             placeholder="Insert Category Name" />
+                        <span asp-validation-for="CategoryName" class="text-danger"></span>
                     </div>
 
                     <input type="Submit" value="Create" class="btn btn-success btn-sm" />
-
                 </form>
             </div>
         </div>
 
     </div>
 
+
+
+   
 </div>

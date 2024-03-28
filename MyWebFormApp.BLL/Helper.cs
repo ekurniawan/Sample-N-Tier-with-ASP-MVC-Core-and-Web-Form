@@ -1,4 +1,8 @@
-﻿namespace MyWebFormApp.BLL
+﻿using System;
+using System.IO;
+using System.Linq;
+
+namespace MyWebFormApp.BLL
 {
     public class Helper
     {
@@ -14,5 +18,13 @@
             }
             return sb.ToString();
         }
+
+        public static bool IsImageFile(string filePath)
+        {
+            string[] imageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
+            string extension = Path.GetExtension(filePath);
+            return imageExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase);
+        }
+
     }
 }
