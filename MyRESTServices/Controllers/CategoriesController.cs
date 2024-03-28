@@ -24,7 +24,7 @@ namespace MyRESTServices.Controllers
         }
 
 
-        [Authorize(Roles = "admin,contributor,reader")]
+        //[Authorize(Roles = "admin,contributor,reader")]
         [HttpGet]
         public async Task<IEnumerable<CategoryDTO>> Get()
         {
@@ -66,7 +66,7 @@ namespace MyRESTServices.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(int id, CategoryCreateDTO categoryCreateDTO)
+        public async Task<IActionResult> Post(CategoryCreateDTO categoryCreateDTO)
         {
             var validateResult = await _validatorCategoryCreateDto.ValidateAsync(categoryCreateDTO);
 
@@ -79,7 +79,7 @@ namespace MyRESTServices.Controllers
             try
             {
                 var newCategory = await _categoryBLL.Insert(categoryCreateDTO);
-                return CreatedAtAction("Get", new { id = id }, newCategory);
+                return CreatedAtAction("Get", new { id = newCategory.CategoryID }, newCategory);
             }
             catch (Exception ex)
             {

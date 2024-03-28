@@ -88,10 +88,10 @@ public partial class AppDbContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         //base.OnConfiguring(optionsBuilder);
         optionsBuilder
                 .UseSqlServer("Data Source=ACTUAL;Initial Catalog=LatihanDb2;Integrated Security=True;TrustServerCertificate=True;");
-    }
+    }*/
 }

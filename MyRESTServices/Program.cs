@@ -55,13 +55,19 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //appdbcontext
-builder.Services.AddDbContext<AppDbContext>(options =>
+/*builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString"));
+});*/
+
+//in memory db
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("MyDb");
 });
 
 //DI
-builder.Services.AddScoped<ICategoryData, CategoryData>();
+builder.Services.AddScoped<ICategoryData, CategoryInMemory>();
 builder.Services.AddScoped<ICategoryBLL, CategoryBLL>();
 builder.Services.AddScoped<IArticleData, ArticleData>();
 builder.Services.AddScoped<IArticleBLL, ArticleBLL>();
