@@ -14,13 +14,15 @@ namespace MyRESTServices.Controllers
         private readonly IArticleBLL _articleBLL;
         private readonly IValidator<ArticleCreateDTO> _validatorArticleCreateDto;
         private readonly IValidator<ArticleUpdateDTO> _validatorArticleUpdateDTO;
+        private readonly ILogger<ArticlesController> _logger;
 
         public ArticlesController(IArticleBLL articleBLL, IValidator<ArticleCreateDTO> validatorArticleCreateDto,
-            IValidator<ArticleUpdateDTO> validatorArticleUpdateDTO)
+            IValidator<ArticleUpdateDTO> validatorArticleUpdateDTO, ILogger<ArticlesController> logger)
         {
             _articleBLL = articleBLL;
             _validatorArticleCreateDto = validatorArticleCreateDto;
             _validatorArticleUpdateDTO = validatorArticleUpdateDTO;
+            _logger = logger;
         }
 
         // GET: api/Articles
@@ -114,15 +116,32 @@ namespace MyRESTServices.Controllers
         }
 
         //PUT 
-        [Authorize(Roles = "admin,contributor")]
+        //[Authorize(Roles = "admin,contributor")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] ArticleUpdateDTO articleUpdateDTO)
         {
+            _logger.LogInformation("---------------> Begin Put");
             var validationResult = _validatorArticleUpdateDTO.Validate(articleUpdateDTO);
+            _logger.LogInformation($"----------------> {validationResult.IsValid}");
             if (!validationResult.IsValid)
             {
-                Helpers.Extensions.AddToModelState(validationResult, ModelState);
-                return BadRequest(ModelState);
+                List<string> strerrors = new List<string>();
+                foreach (var error in validationResult.Errors)
+                {
+                    strerrors.Add(error.ErrorMessage);
+                }
+
+                var responseResult = new ResponseResult
+                {
+                    ErrNumber = 111,
+                    ErrMessage = "Validasi Inputan Gagal",
+                    ResultObject = strerrors
+                };
+                //Helpers.Extensions.AddToModelState(validationResult, ModelState);
+                //return BadRequest(ModelState);
+                _logger.LogInformation($"-----------> {responseResult.ErrMessage}");
+                return BadRequest(responseResult);
+                //return BadRequest("Error");
             }
 
             var article = await _articleBLL.Update(id, articleUpdateDTO);

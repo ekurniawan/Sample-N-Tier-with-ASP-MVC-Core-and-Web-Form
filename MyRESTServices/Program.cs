@@ -55,16 +55,16 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 //appdbcontext
-/*builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString"));
-});*/
-
-//in memory db
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseInMemoryDatabase("MyDb");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbConnectionString"));
 });
+
+//in memory db
+/*builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseInMemoryDatabase("MyDb");
+});*/
 
 //DI
 builder.Services.AddScoped<ICategoryData, CategoryInMemory>();
@@ -76,11 +76,27 @@ builder.Services.AddScoped<IUserBLL, UserBLL>();
 builder.Services.AddScoped<IRoleData, RoleData>();
 builder.Services.AddScoped<IRoleBLL, RoleBLL>();
 
+//add CORS all domain
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://example.com",
+                                              "http://www.contoso.com");
+                      });
+});
+
+
 
 //automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddValidatorsFromAssemblyContaining<CategoryCreateDTOValidator>();
-
+/*builder.Services.AddScoped<IValidator<ArticleUpdateDTO>, ArticleUpdateDTOValidator>();
+builder.Services.AddScoped<IValidator<ArticleCreateDTO>, ArticleCreateDTOValidator>();
+builder.Services.AddScoped<IValidator<CategoryCreateDTO>, CategoryCreateDTOValidator>();
+builder.Services.AddScoped<IValidator<CategoryUpdateDTO>, CategoryUpdateDTOValidator>();*/
 
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
@@ -111,6 +127,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.UseCors(MyAllowSpecificOrigins);
+//allow all domain
+app.UseCors(builder => builder
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowCredentials());
 
 
 app.UseHttpsRedirection();

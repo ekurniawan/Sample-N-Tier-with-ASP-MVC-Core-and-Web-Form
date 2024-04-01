@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyRESTServices.BLL.DTOs;
 using MyRESTServices.BLL.Interfaces;
+using MyRESTServices.Models;
 
 namespace MyRESTServices.Controllers
 {
@@ -26,10 +27,16 @@ namespace MyRESTServices.Controllers
 
         //[Authorize(Roles = "admin,contributor,reader")]
         [HttpGet]
-        public async Task<IEnumerable<CategoryDTO>> Get()
+        public async Task<IActionResult> Get()
         {
             var results = await _categoryBLL.GetAll();
-            return results;
+            var responseResult = new ResponseResult
+            {
+                ErrNumber = 200,
+                ErrMessage = "Success",
+                ResultObject = results
+            };
+            return Ok(responseResult);
         }
 
         /// <summary>
@@ -46,6 +53,7 @@ namespace MyRESTServices.Controllers
             {
                 return NotFound();
             }
+            //var responseResult = 
             return Ok(result);
         }
 
