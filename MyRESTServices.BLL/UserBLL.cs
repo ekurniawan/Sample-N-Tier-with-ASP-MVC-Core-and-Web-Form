@@ -41,7 +41,7 @@ namespace MyRESTServices.BLL
 
         public async Task<UserDTO> GetByUsername(string username)
         {
-            var user = _userData.GetByUsername(username);
+            var user = await _userData.GetByUsername(username);
             var userDTO = _mapper.Map<UserDTO>(user);
             return userDTO;
         }

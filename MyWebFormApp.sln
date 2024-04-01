@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleMVC", "SampleMVC\Samp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRESTServices", "MyRESTServices\MyRESTServices.csproj", "{6A292993-2A4B-46C9-ADFF-70B76D84F0BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRESTServices.Domain", "MyRESTServices.Domain\MyRESTServices.Domain.csproj", "{69B4F745-2F82-4F3A-A6FA-594B0EAC0EBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRESTServices.Domain", "MyRESTServices.Domain\MyRESTServices.Domain.csproj", "{69B4F745-2F82-4F3A-A6FA-594B0EAC0EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRESTServices.Data", "MyRESTServices.Data\MyRESTServices.Data.csproj", "{E7DB0A61-1FCC-4778-99D2-33ABC69B0B5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRESTServices.Data", "MyRESTServices.Data\MyRESTServices.Data.csproj", "{E7DB0A61-1FCC-4778-99D2-33ABC69B0B5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRESTServices.BLL", "MyRESTServices.BLL\MyRESTServices.BLL.csproj", "{527B852C-0A22-49D0-BB3F-A49836BF115E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyRESTServices.BLL", "MyRESTServices.BLL\MyRESTServices.BLL.csproj", "{527B852C-0A22-49D0-BB3F-A49836BF115E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyRESTServices.ClientMVC", "MyRESTServices.ClientMVC\MyRESTServices.ClientMVC.csproj", "{3E543451-DC4C-43DA-B31C-6F56678C9B0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{527B852C-0A22-49D0-BB3F-A49836BF115E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{527B852C-0A22-49D0-BB3F-A49836BF115E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{527B852C-0A22-49D0-BB3F-A49836BF115E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E543451-DC4C-43DA-B31C-6F56678C9B0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E543451-DC4C-43DA-B31C-6F56678C9B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E543451-DC4C-43DA-B31C-6F56678C9B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E543451-DC4C-43DA-B31C-6F56678C9B0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

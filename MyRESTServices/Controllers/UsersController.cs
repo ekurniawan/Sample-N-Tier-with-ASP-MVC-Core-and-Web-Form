@@ -83,10 +83,10 @@ namespace MyRESTServices.Controllers
         }
 
         // GET api/<UsersController>/5
-        [HttpGet("{id}")]
+        [HttpGet("GetByUser")]
         public async Task<UserDTO> Get(string username)
         {
-            var user = await _userBLL.GetByUsername(username);
+            var user = await _userBLL.GetUserWithRoles(username);
             return user;
         }
 

@@ -25,7 +25,7 @@ namespace MyRESTServices.Controllers
         }
 
 
-        //[Authorize(Roles = "admin,contributor,reader")]
+        [Authorize(Roles = "admin,contributor,reader")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -36,7 +36,7 @@ namespace MyRESTServices.Controllers
                 ErrMessage = "Success",
                 ResultObject = results
             };
-            return Ok(responseResult);
+            return Ok(results);
         }
 
         /// <summary>
